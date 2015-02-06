@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Paladyne.Angulrjs.Web
+namespace Paladyne.Angularjs.Web
 {
     public class RouteConfig
     {

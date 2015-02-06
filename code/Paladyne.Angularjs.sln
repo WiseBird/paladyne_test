@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.Web", "Paladyne.Angularjs.Web\Paladyne.Angularjs.Web.csproj", "{29E5D5DC-14A0-4FE8-A8EE-DBDB31D661C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.DAL", "Paladyne.Angularjs.DAL\Paladyne.Angularjs.DAL.csproj", "{62F6E899-A6A6-4014-9BF1-B5034C08A1FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.BL", "Paladyne.Angularjs.BL\Paladyne.Angularjs.BL.csproj", "{22E04412-D724-4444-A3CD-F256CDEE153F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29E5D5DC-14A0-4FE8-A8EE-DBDB31D661C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E5D5DC-14A0-4FE8-A8EE-DBDB31D661C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E5D5DC-14A0-4FE8-A8EE-DBDB31D661C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E5D5DC-14A0-4FE8-A8EE-DBDB31D661C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62F6E899-A6A6-4014-9BF1-B5034C08A1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F6E899-A6A6-4014-9BF1-B5034C08A1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F6E899-A6A6-4014-9BF1-B5034C08A1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F6E899-A6A6-4014-9BF1-B5034C08A1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E04412-D724-4444-A3CD-F256CDEE153F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E04412-D724-4444-A3CD-F256CDEE153F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E04412-D724-4444-A3CD-F256CDEE153F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E04412-D724-4444-A3CD-F256CDEE153F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
