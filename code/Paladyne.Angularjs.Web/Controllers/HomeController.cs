@@ -64,7 +64,7 @@ namespace Paladyne.Angularjs.Web.Controllers
         [Authorize]
         public ActionResult Action()
         {
-            return Json("Access");
+            return Json("Access", JsonRequestBehavior.AllowGet);
         }
 	}
 }
