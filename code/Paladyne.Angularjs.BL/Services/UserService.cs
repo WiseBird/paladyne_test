@@ -18,6 +18,7 @@ namespace Paladyne.Angularjs.BL.Services
     {
         User GetById(string id);
         User GetByName(string name);
+        User GetByNameAndPassword(string name, string password);
 
         bool ExistsByName(string name);
 
@@ -47,6 +48,10 @@ namespace Paladyne.Angularjs.BL.Services
         public bool ExistsByName(string name)
         {
             return UnitOfWork.Users.Any(x => x.UserName == name);
+        }
+        public User GetByNameAndPassword(string name, string password)
+        {
+            return UserManager.Find(name, password);
         }
 
         public List<User> GetAll(Include<User> include)
