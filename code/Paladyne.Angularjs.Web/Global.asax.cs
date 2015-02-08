@@ -17,8 +17,8 @@ namespace Paladyne.Angularjs.Web
             AutoMapperConfig.RegisterMappers();
             DatabaseConfig.ConfigureDatabase();
             AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }

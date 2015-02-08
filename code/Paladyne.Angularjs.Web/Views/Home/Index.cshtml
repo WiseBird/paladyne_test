@@ -35,6 +35,11 @@
                 All you get is this text and a mostly barebones HTML document.
             </p>
             @(Html.Kendo().DatePicker().Name("datepicker").Deferred())
+            <p>
+                <a id="btnInvoke" class="btn btn-default" href="#" role="button">Invoke</a>
+                <a id="btnLogin" class="btn btn-default" href="#" role="button">Login</a>
+                <a id="btnLogout" class="btn btn-default" href="#" role="button">Logout</a>
+            </p>
         </div>
         <hr />
         <footer>
@@ -46,5 +51,48 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     @Html.Kendo().DeferredScripts()
+
+    <script type="text/javascript">
+        var token = null;
+
+        $(function () {
+            $("#btnInvoke").click(function () {
+                var headers = {};
+                if (token) {
+                    headers.Authorization = 'Bearer ' + token;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/users/1',
+                    headers: headers
+                }).done(function (data) {
+                    console.log(data);
+                }).fail(function () {
+                    console.log(arguments);
+                });
+            });
+
+            $("#btnLogin").click(function () {
+                var loginData = {
+                    grant_type: 'password',
+                    username: "Administrator",
+                    password: "123456"
+                };
+                //JSON.stringify
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'account/login',
+                    data: loginData
+                }).done(function (tkn) {
+                    console.log(tkn);
+                    token = tkn;
+                }).fail(function () {
+                    console.log(arguments);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
