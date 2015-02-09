@@ -1,7 +1,11 @@
-﻿using Microsoft.Owin.Infrastructure;
+﻿using System.Web;
+
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using Ninject;
 using Paladyne.Angularjs.BL.Services;
+using Paladyne.Angularjs.DAL.Entities;
 using Paladyne.Angularjs.Web.App_Start;
 using System;
 using System.Collections.Generic;
@@ -18,6 +22,14 @@ namespace Paladyne.Angularjs.Web.Controllers
         [Inject]
         public IUserService UserService { get; set; }
 
+        public virtual IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
@@ -27,17 +39,34 @@ namespace Paladyne.Angularjs.Web.Controllers
                 return this.HttpNotFound();
             }
 
+            SetAuthCookie(user);
+            var token = GetAuthToken(user);
+            return Json(new { token, userId = user.Id });
+        }
+
+        private static string GetAuthToken(User user)
+        {
             var identity = new ClaimsIdentity(OwinConfig.OAuthBearerOptions.AuthenticationType);
-            identity.AddClaim(new Claim(ClaimTypes.Name, username));
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             var currentUtc = new SystemClock().UtcNow;
-            AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
+            var ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
             ticket.Properties.IssuedUtc = currentUtc;
             ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(30));
 
             string token = OwinConfig.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
-            return Content(token);
+            return token;
+        }
+
+        private void SetAuthCookie(User user)
+        {
+            var identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+            this.AuthenticationManager.SignOut();
+            this.AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true, }, identity);
         }
     }
 }

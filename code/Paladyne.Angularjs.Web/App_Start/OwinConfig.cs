@@ -5,6 +5,7 @@ using System.Web;
 
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 
 using Owin;
 
@@ -23,6 +24,11 @@ namespace Paladyne.Angularjs.Web.App_Start
         {
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
             builder.UseOAuthBearerAuthentication(OAuthBearerOptions);
+
+            builder.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+            });
         }
     }
 }
