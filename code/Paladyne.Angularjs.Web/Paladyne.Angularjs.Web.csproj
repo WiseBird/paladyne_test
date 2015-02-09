@@ -184,9 +184,9 @@
     <Content Include="App\navbar\userMenu.html" />
     <Content Include="App\navbar\userMenuCtrl.js" />
     <Content Include="App\navbar\userMenuDirective.js" />
-    <Content Include="App\welcome\welcome.html" />
-    <Content Include="App\welcome\welcomeCtrl.js" />
-    <Content Include="App\welcome\welcome.js" />
+    <Content Include="App\modules\welcome\welcome.html" />
+    <Content Include="App\modules\welcome\welcomeCtrl.js" />
+    <Content Include="App\modules\welcome\welcome.js" />
     <Content Include="App_Data\Paladyne.Angularjs.mdf" />
     <Content Include="App_Data\Paladyne.Angularjs_log.ldf" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -995,6 +995,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\ocLazyLoad.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\toastr.js" />
@@ -1018,6 +1019,7 @@
     <Compile Include="Infrastructure\Configuration.cs" />
     <Compile Include="Infrastructure\DataBaseFiller.cs" />
     <Compile Include="Infrastructure\DataBaseInitializer.cs" />
+    <Compile Include="Infrastructure\ModulesSourceProtectionHandler.cs" />
     <Compile Include="Infrastructure\ValidationErrors.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
