@@ -4,9 +4,9 @@ angular.module('main').config(function ($httpProvider, $provide) {
     $provide.factory('addAuthTokenInterceptor', function (authInfo) {
         return {
             request: function (config) {
-                if (config.method == "POST") {
-                    config.data = config.data || {};
-                    config.data.token = authInfo.token;
+                if (authInfo.token) {
+                    config.headers = config.headers || {};
+                    config.headers.Authorization = 'Bearer ' + authInfo.token;
                 }
                 return config;
             }
@@ -24,7 +24,7 @@ angular.module('main').config([
                 var authInfo = injector.get('authInfo');
                 var modules = injector.get('modules');
 
-                if (authInfo && authInfo.isAuthenticated) {
+                if (authInfo.isAuthenticated) {
                     return modules.welcome.view;
                 }
 

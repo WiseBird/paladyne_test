@@ -66,7 +66,7 @@ namespace Paladyne.Angularjs.BL.Services
         }
         public User GetByNameAndPasswordEx(string name, string password, Include<User> include)
         {
-            var user = this.GetByNameEx(name, include);
+            var user = UnitOfWork.Users.Include(include).FirstOrDefault(x => x.UserName == name);
             if (user == null)
             {
                 return null;
@@ -78,6 +78,9 @@ namespace Paladyne.Angularjs.BL.Services
             {
                 return null;
             }
+
+            user.LastLogin = DateTime.Now;
+            UnitOfWork.SaveChanges();
 
             return user;
         }

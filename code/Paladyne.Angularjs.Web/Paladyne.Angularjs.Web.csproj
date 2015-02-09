@@ -171,6 +171,7 @@
     <Content Include="App\index\someLogo.html" />
     <Content Include="App\index\someLogoCtrl.js" />
     <Content Include="App\index\someLogoDirective.js" />
+    <Content Include="App\modules\welcome\dataSrv.js" />
     <Content Include="App\navbar\navbar.html" />
     <Content Include="App\navbar\authForm.html" />
     <Content Include="App\navbar\authFormCtrl.js" />
@@ -1013,12 +1014,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Configuration.cs" />
     <Compile Include="Infrastructure\DataBaseFiller.cs" />
     <Compile Include="Infrastructure\DataBaseInitializer.cs" />
+    <Compile Include="Infrastructure\ModuleAuthorize.cs" />
     <Compile Include="Infrastructure\ModulesSourceProtectionHandler.cs" />
     <Compile Include="Infrastructure\ValidationErrors.cs" />
     <Compile Include="Models\Modules.cs" />

@@ -48,6 +48,7 @@
     var modules = {
         welcome: new module('welcome', [
             '/App/modules/welcome/welcome.js',
+            '/App/modules/welcome/dataSrv.js',
             '/App/modules/welcome/welcomeCtrl.js'
         ]),
         userMng: new module('userMng', []),
