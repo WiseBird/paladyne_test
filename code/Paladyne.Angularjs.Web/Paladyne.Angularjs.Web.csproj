@@ -167,8 +167,10 @@
     <Content Include="App\app.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
-    <Content Include="App\index\index.html" />
-    <Content Include="App\index\indexCtrl.js" />
+    <Content Include="App\common\modulesSvc.js" />
+    <Content Include="App\index\someLogo.html" />
+    <Content Include="App\index\someLogoCtrl.js" />
+    <Content Include="App\index\someLogoDirective.js" />
     <Content Include="App\navbar\navbar.html" />
     <Content Include="App\navbar\authForm.html" />
     <Content Include="App\navbar\authFormCtrl.js" />
@@ -993,6 +995,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />

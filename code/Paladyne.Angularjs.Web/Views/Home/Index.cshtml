@@ -14,25 +14,32 @@
 <body>
     <pt-navbar></pt-navbar>
 
-    <div class="container body-content" ng-view>
+    <div class="container body-content">
+        <pt-index-some-logo></pt-index-some-logo>
+
+        <div ng-view></div>
     </div>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Scripts/require.js"></script>
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/ocLazyLoad.js"></script>
     @*Html.Kendo().DeferredScripts()*@
     
-    
-    <script src="~/App/welcome/welcome.js"></script>
-    <script src="~/App/welcome/welcomeCtrl.js"></script>
-
     <script src="~/App/app.js"></script>
+
     <script src="~/App/common/popupSvc.js"></script>
     <script src="~/App/common/authSvc.js"></script>
     <script src="~/App/common/authInfo.js"></script>
+    <script src="~/App/common/modulesSvc.js"></script>
+
+    <script src="~/App/index/someLogoCtrl.js"></script>
+    <script src="~/App/index/someLogoDirective.js"></script>
+
     <script src="~/App/navbar/navbarCtrl.js"></script>
     <script src="~/App/navbar/navbarDirective.js"></script>
     <script src="~/App/navbar/authFormCtrl.js"></script>

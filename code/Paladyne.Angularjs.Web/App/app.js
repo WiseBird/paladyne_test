@@ -1,4 +1,4 @@
-﻿angular.module('main', ['ngRoute', 'welcome']);
+﻿angular.module('main', ['ngRoute', 'oc.lazyLoad']);
 
 angular.module('main').config(function ($httpProvider, $provide) {
     $provide.factory('addAuthTokenInterceptor', function (authInfo) {
@@ -17,23 +17,39 @@ angular.module('main').config(function ($httpProvider, $provide) {
 });
 
 angular.module('main').config([
-    '$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', { templateUrl: '/App/index/index.html', controller: 'indexCtrl' });
-        $routeProvider.when('/Welcome', { templateUrl: '/App/welcome/welcome.html', controller: 'welcomeCtrl' });
+    '$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/', {
+            templateUrl: function () {
+                var injector = angular.element('*[ng-app]').injector();
+                var authInfo = injector.get('authInfo');
+                var modules = injector.get('modules');
+
+                if (authInfo && authInfo.isAuthenticated) {
+                    return modules.welcome.view;
+                }
+
+                return undefined;
+            }, resolve: {
+                load: ['authInfo', 'modules', function (authInfo, modules) {
+                    if (!authInfo.isAuthenticated) {
+                        return undefined;
+                    }
+
+                    return modules.welcome.load();
+                }]
+            }
+        });
         $routeProvider.otherwise({ redirectTo: '/' });
     }
 ]);
 
 angular.module('main').value('toastr', toastr);
+angular.module('main').value('require', require);
 
 angular.module('main').run(function ($rootScope, $location, $route, authInfo) {
-    $rootScope.$on("$routeChangeStart", function(event, next) {
+    $rootScope.$on("$routeChangeStart", function (event, next) {
         if (!authInfo.isAuthenticated) {
             $location.path("/");
-        } else {
-            if (next.$$route.originalPath == "/") {
-                $location.path("/Welcome");
-            }
         }
     });
 
