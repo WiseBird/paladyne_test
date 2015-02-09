@@ -3,7 +3,6 @@
         isAuthenticated: false,
         token: "",
         userId: null,
-        userName: null,
-        modules: []
+        userName: null
     };
 });

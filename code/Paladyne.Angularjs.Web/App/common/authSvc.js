@@ -11,9 +11,8 @@
                 authInfo.userId = data.userId;
                 authInfo.userName = username;
                 authInfo.token = data.token;
-                authInfo.modules = data.modules;
 
-                $rootScope.$broadcast("auth:logged_in", authInfo);
+                $rootScope.$broadcast("auth:logged_in", data);
             }).error(function () {
                 popup.error("Invalid login or password");
             });

@@ -1,6 +1,7 @@
-﻿angular.module('main').factory('modules', function ($q, $ocLazyLoad, authInfo) {
+﻿angular.module('main').factory('modules', function ($q, $ocLazyLoad, $rootScope, authInfo) {
     function module(id, files) {
         this.id = id;
+        this.name = id;
 
         this.view = 'App/modules/' + id + '/' + id + '.html';
 
@@ -8,6 +9,8 @@
         this.files.unshift('/App/modules/' + id + '/' + id + '.js');
 
         this.loaded = false;
+        this.canSee = false;
+        this.canEdit = false;
     }
     module.prototype.load = function() {
         if (this.loaded) {
@@ -26,12 +29,32 @@
         });
     }
 
-    return {
+    $rootScope.$on("auth:logged_in", function (event, data) {
+        for (var i = 0; i < data.modules.length; i++) {
+            var mdl = data.modules[i];
+
+            if (!modules[mdl.id]) {
+                continue;
+            }
+
+            modules[mdl.id].name = mdl.name;
+            modules[mdl.id].canSee = mdl.permission != "Prohibit";
+            modules[mdl.id].canEdit = mdl.permission == "Edit";
+        }
+
+        $rootScope.$broadcast("modules:changed");
+    });
+
+    var modules = {
         welcome: new module('welcome', [
-                '/App/modules/welcome/welcome.js',
-                '/App/modules/welcome/welcomeCtrl.js'
+            '/App/modules/welcome/welcome.js',
+            '/App/modules/welcome/welcomeCtrl.js'
         ]),
-        hasAccessToManagement: function () {
+        userMng: new module('userMng', []),
+        moduleList: new module('moduleList', []),
+
+
+        hasAccessToManagement: function() {
             if (!authInfo.isAuthenticated) {
                 return false;
             }
@@ -48,5 +71,6 @@
 
             return false;
         }
-    }
+    };
+    return modules;
 })
