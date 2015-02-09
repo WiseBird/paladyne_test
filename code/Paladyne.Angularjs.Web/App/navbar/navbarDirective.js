@@ -2,7 +2,7 @@
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: '/App/common/navbar.html',
+        templateUrl: '/App/navbar/navbar.html',
         controller: 'navbarCtrl'
     }
 });

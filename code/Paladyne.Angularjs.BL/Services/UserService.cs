@@ -17,8 +17,11 @@ namespace Paladyne.Angularjs.BL.Services
     public interface IUserService
     {
         User GetById(string id);
+        User GetByIdEx(string id, Include<User> include);
         User GetByName(string name);
+        User GetByNameEx(string name, Include<User> include);
         User GetByNameAndPassword(string name, string password);
+        User GetByNameAndPasswordEx(string name, string password, Include<User> include);
 
         bool ExistsByName(string name);
 
@@ -39,11 +42,19 @@ namespace Paladyne.Angularjs.BL.Services
 
         public User GetById(string id)
         {
-            return UnitOfWork.Users.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return GetByIdEx(id, new Include<User>());
+        }
+        public User GetByIdEx(string id, Include<User> include)
+        {
+            return UnitOfWork.Users.Include(include).AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
         public User GetByName(string name)
         {
-            return UnitOfWork.Users.AsNoTracking().FirstOrDefault(x => x.UserName == name);
+            return GetByNameEx(name, new Include<User>());
+        }
+        public User GetByNameEx(string name, Include<User> include)
+        {
+            return UnitOfWork.Users.Include(include).AsNoTracking().FirstOrDefault(x => x.UserName == name);
         }
         public bool ExistsByName(string name)
         {
@@ -51,7 +62,24 @@ namespace Paladyne.Angularjs.BL.Services
         }
         public User GetByNameAndPassword(string name, string password)
         {
-            return UserManager.Find(name, password);
+            return GetByNameAndPasswordEx(name, password, new Include<User>());
+        }
+        public User GetByNameAndPasswordEx(string name, string password, Include<User> include)
+        {
+            var user = this.GetByNameEx(name, include);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var passwordHasher = new PasswordHasher();
+            var result = passwordHasher.VerifyHashedPassword(user.PasswordHash, password);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                return null;
+            }
+
+            return user;
         }
 
         public List<User> GetAll(Include<User> include)

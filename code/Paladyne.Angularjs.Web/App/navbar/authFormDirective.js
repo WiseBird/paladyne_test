@@ -2,7 +2,7 @@
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: '/App/common/navbarAuthForm.html',
+        templateUrl: '/App/navbar/authForm.html',
         controller: 'navbarAuthFormCtrl'
     }
 });

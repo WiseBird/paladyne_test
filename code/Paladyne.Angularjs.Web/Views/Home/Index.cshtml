@@ -14,22 +14,7 @@
 <body>
     <pt-navbar></pt-navbar>
 
-    <div class="container body-content">
-        <div>
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">
-                Use this document as a way to quickly start any new project.<br>
-                All you get is this text and a mostly barebones HTML document.
-            </p>
-            @(Html.Kendo().DatePicker().Name("datepicker").Deferred())
-            <p>
-                <a id="btnInvoke" class="btn btn-default" href="#" role="button">Invoke</a>
-            </p>
-        </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <div class="container body-content" ng-view>
     </div>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -37,21 +22,25 @@
     <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular.js"></script>
-    @Html.Kendo().DeferredScripts()
+    <script src="~/Scripts/angular-route.js"></script>
+    @*Html.Kendo().DeferredScripts()*@
     
     
     <script src="~/App/welcome/welcome.js"></script>
-    <script src="~/App/welcome/greetingsCtrl.js"></script>
-    <script src="~/App/welcome/greetingsDirective.js"></script>
+    <script src="~/App/welcome/welcomeCtrl.js"></script>
 
     <script src="~/App/app.js"></script>
     <script src="~/App/common/popupSvc.js"></script>
     <script src="~/App/common/authSvc.js"></script>
     <script src="~/App/common/authInfo.js"></script>
-    <script src="~/App/common/navbarCtrl.js"></script>
-    <script src="~/App/common/navbarDirective.js"></script>
-    <script src="~/App/common/navbarAuthFormCtrl.js"></script>
-    <script src="~/App/common/navbarAuthFormDirective.js"></script>
+    <script src="~/App/navbar/navbarCtrl.js"></script>
+    <script src="~/App/navbar/navbarDirective.js"></script>
+    <script src="~/App/navbar/authFormCtrl.js"></script>
+    <script src="~/App/navbar/authFormDirective.js"></script>
+    <script src="~/App/navbar/mainMenuCtrl.js"></script>
+    <script src="~/App/navbar/mainMenuDirective.js"></script>
+    <script src="~/App/navbar/userMenuCtrl.js"></script>
+    <script src="~/App/navbar/userMenuDirective.js"></script>
 
     <script type="text/javascript">
         var token = null;

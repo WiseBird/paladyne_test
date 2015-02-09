@@ -7,6 +7,6 @@
     };
 
     $scope.submit = function () {
-        auth.authenticate($scope.data.username, $scope.data.password);
+        auth.login($scope.data.username, $scope.data.password);
     }
 });

@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using Ninject;
+
+using Paladyne.Angularjs.BL.Includes;
 using Paladyne.Angularjs.BL.Services;
 using Paladyne.Angularjs.DAL.Entities;
 using Paladyne.Angularjs.Web.App_Start;
@@ -33,7 +35,7 @@ namespace Paladyne.Angularjs.Web.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var user = UserService.GetByNameAndPassword(username, password);
+            var user = UserService.GetByNameAndPasswordEx(username, password, new UserInclude().UserModules());
             if (user == null)
             {
                 return this.HttpNotFound();
@@ -41,7 +43,16 @@ namespace Paladyne.Angularjs.Web.Controllers
 
             SetAuthCookie(user);
             var token = GetAuthToken(user);
-            return Json(new { token, userId = user.Id });
+
+            return Json(new {
+                token, 
+                userId = user.Id, 
+                modules = user.UserModules.Select(x => new {
+                    id = x.ModuleId,
+                    name = x.ModuleName,
+                    permission = x.Permission.ToString()
+                })
+            });
         }
 
         private static string GetAuthToken(User user)
@@ -58,7 +69,6 @@ namespace Paladyne.Angularjs.Web.Controllers
             string token = OwinConfig.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
             return token;
         }
-
         private void SetAuthCookie(User user)
         {
             var identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
