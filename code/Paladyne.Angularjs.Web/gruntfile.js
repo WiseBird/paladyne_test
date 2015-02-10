@@ -3,14 +3,16 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		ngAnnotate: {
 			options: {
-				singleQuotes: true,
+			    singleQuotes: true,
+			    add: true,
+                remove: true
 			},
 			app: {
 				files: [
 					{
 						expand: true,
 						src: ['App/**/*.js'],
-					},
+					}
 				],
 			},
 		},

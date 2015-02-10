@@ -5,15 +5,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Ninject;
+
+using Paladyne.Angularjs.BL.Includes;
+using Paladyne.Angularjs.BL.Services;
+using Paladyne.Angularjs.Web.Infrastructure;
+using Paladyne.Angularjs.Web.Models;
+
 namespace Paladyne.Angularjs.Web.Controllers
 {
     public class UsersController : ApiController
     {
-        [Authorize]
+        [Inject]
+        public IUserService UserService { get; set; }
+
+        [ModuleAuthorize(Modules.users)]
+        public IHttpActionResult Get()
+        {
+            var users = UserService.GetAll(new UserInclude());
+            return Ok(users);
+        }
+
+        [ModuleAuthorize(Modules.users)]
         public IHttpActionResult Get(int id)
         {
-            var userName = this.RequestContext.Principal.Identity.Name;
-            return Ok(String.Format("Hello, {0}.", userName));
+            var users = UserService.GetAll(new UserInclude());
+            return Ok(users);
         }
     }
 }

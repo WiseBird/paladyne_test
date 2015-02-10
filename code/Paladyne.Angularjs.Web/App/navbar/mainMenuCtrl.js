@@ -7,6 +7,6 @@ angular.module('main').controller('navbarMainMenuCtrl', ['$rootScope', '$scope',
     updateScope();
 
     function updateScope() {
-        $scope.data.canAccessManagement = modules.userMng.canSee || modules.moduleList.canSee;
+        $scope.data.canAccessManagement = modules.users.canSee || modules.userModules.canSee;
     }
 }]);

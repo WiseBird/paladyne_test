@@ -1,0 +1,18 @@
+﻿<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Modules</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{ user.FirstName || "[Missing]" }}</td>
+                <td>{{ user.LirstName || "[Missing]" }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

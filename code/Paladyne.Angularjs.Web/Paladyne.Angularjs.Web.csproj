@@ -168,9 +168,15 @@
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
     <Content Include="App\common\modulesSvc.js" />
+    <Content Include="App\index\management.html" />
+    <Content Include="App\index\managementCtrl.js" />
     <Content Include="App\index\someLogo.html" />
-    <Content Include="App\index\someLogoCtrl.js" />
-    <Content Include="App\index\someLogoDirective.js" />
+    <Content Include="App\modules\userModules\userModules.js" />
+    <Content Include="App\modules\users\users.js" />
+    <Content Include="App\modules\users\usersSrv.js" />
+    <Content Include="App\modules\users\usersTable.html" />
+    <Content Include="App\modules\users\usersTableCtrl.js" />
+    <Content Include="App\modules\users\usersTableDirective.js" />
     <Content Include="App\modules\welcome\dataSrv.js" />
     <Content Include="App\navbar\navbar.html" />
     <Content Include="App\navbar\authForm.html" />
@@ -205,6 +211,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="gruntfile.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -241,6 +248,7 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

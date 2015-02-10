@@ -61,7 +61,7 @@ namespace Paladyne.Angularjs.Web.Infrastructure
                 return false;
             }
 
-            var moduleId = match.Groups[1].Value.ToLower();
+            var moduleId = match.Groups[1].Value;
             var module = currentUser.UserModules.FirstOrDefault(x => x.ModuleId == moduleId);
             if (module == null)
             {
@@ -81,17 +81,24 @@ namespace Paladyne.Angularjs.Web.Infrastructure
             context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             context.Response.End();
         }
+        private static void OnNotFound(HttpContext context)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            context.Response.End();
+        }
 
         private static void SendContentTypeAndFile(HttpContext context, String filename)
         {
             if (String.IsNullOrEmpty(filename))
             {
+                OnNotFound(context);
                 return;
             }
 
             var fileinfo = new System.IO.FileInfo(filename);
             if (!fileinfo.Exists)
             {
+                OnNotFound(context);
                 return;
             }
 

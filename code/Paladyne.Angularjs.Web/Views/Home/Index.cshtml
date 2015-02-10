@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="main">
+<html ng-app="main" @*ng-strict-di*@>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +15,6 @@
     <pt-navbar></pt-navbar>
 
     <div class="container body-content">
-        <pt-index-some-logo></pt-index-some-logo>
-
         <div ng-view></div>
     </div>
 
@@ -27,6 +25,7 @@
     <script src="~/Scripts/require.js"></script>
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-resource.js"></script>
     <script src="~/Scripts/ocLazyLoad.js"></script>
     @*Html.Kendo().DeferredScripts()*@
     
@@ -37,8 +36,7 @@
     <script src="~/App/common/authInfo.js"></script>
     <script src="~/App/common/modulesSvc.js"></script>
 
-    <script src="~/App/index/someLogoCtrl.js"></script>
-    <script src="~/App/index/someLogoDirective.js"></script>
+    <script src="~/App/index/managementCtrl.js"></script>
 
     <script src="~/App/navbar/navbarCtrl.js"></script>
     <script src="~/App/navbar/navbarDirective.js"></script>

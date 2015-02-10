@@ -8,7 +8,7 @@ namespace Paladyne.Angularjs.Web.Models
     public enum Modules
     {
         welcome,
-        userMng,
-        moduleList
+        users,
+        userModules
     }
 }

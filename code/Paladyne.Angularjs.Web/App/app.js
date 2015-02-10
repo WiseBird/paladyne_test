@@ -1,4 +1,4 @@
-angular.module('main', ['ngRoute', 'oc.lazyLoad']);
+﻿angular.module('main', ['ngRoute', 'ngResource', 'oc.lazyLoad']);
 
 angular.module('main').config(['$httpProvider', '$provide', function ($httpProvider, $provide) {
     $provide.factory('addAuthTokenInterceptor', ['authInfo', function (authInfo) {
@@ -16,8 +16,7 @@ angular.module('main').config(['$httpProvider', '$provide', function ($httpProvi
     $httpProvider.interceptors.push('addAuthTokenInterceptor');
 }]);
 
-angular.module('main').config([
-    '$routeProvider', function ($routeProvider) {
+angular.module('main').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
             templateUrl: function () {
                 var injector = angular.element('*[ng-app]').injector();
@@ -28,7 +27,7 @@ angular.module('main').config([
                     return modules.welcome.view;
                 }
 
-                return undefined;
+                return "/App/index/someLogo.html";
             }, resolve: {
                 load: ['authInfo', 'modules', function (authInfo, modules) {
                     if (!authInfo.isAuthenticated) {
@@ -39,7 +38,33 @@ angular.module('main').config([
                 }]
             }
         });
+        $routeProvider.when('/management', {
+            templateUrl: '/App/index/management.html',
+            //controller: 'indexManagementCtrl'
+            resolve: {
+                load: ['authInfo', 'modules', '$q', function (authInfo, modules, $q) {
+                    if (!authInfo.isAuthenticated) {
+                        return undefined;
+                    }
+
+                    var promises = [];
+                    if (modules.users.canSee) {
+                        promises.push(modules.users.load());
+                    }
+                    if (modules.userModules.canSee) {
+                        promises.push(modules.userModules.load());
+                    }
+
+                    return $q.all(promises);
+                }]
+            }
+        });
         $routeProvider.otherwise({ redirectTo: '/' });
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
     }
 ]);
 
@@ -48,12 +73,17 @@ angular.module('main').value('require', require);
 
 angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', function ($rootScope, $location, $route, authInfo) {
     $rootScope.$on("$routeChangeStart", function (event, next) {
-        if (!authInfo.isAuthenticated) {
+        var headintToTheRoot = next.$$route && (next.$$route.originalPath == "/");
+        if (!authInfo.isAuthenticated && !headintToTheRoot) {
+            event.preventDefault();
             $location.path("/");
         }
     });
 
     $rootScope.$on("auth:logged_in", function () {
+        $route.reload();
+    });
+    $rootScope.$on("auth:logged_out", function () {
         $route.reload();
     });
 }])

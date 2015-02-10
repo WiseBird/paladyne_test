@@ -44,6 +44,24 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
 
         $rootScope.$broadcast("modules:changed");
     });
+    $rootScope.$on("auth:logged_out", function () {
+        for (var property in modules) {
+            if (!modules.hasOwnProperty(property)) {
+                continue;
+            }
+
+            if (!(modules[property] instanceof module)) {
+                continue;
+            }
+
+            var mdl = modules[property];
+            mdl.name = mdl.id;
+            mdl.canSee = false;
+            mdl.canEdit = false;
+        }
+
+        $rootScope.$broadcast("modules:changed");
+    });
 
     var modules = {
         welcome: new module('welcome', [
@@ -51,26 +69,15 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
             '/App/modules/welcome/dataSrv.js',
             '/App/modules/welcome/welcomeCtrl.js'
         ]),
-        userMng: new module('userMng', []),
-        moduleList: new module('moduleList', []),
-
+        users: new module('users', [
+            '/App/modules/users/usersSrv.js',
+            '/App/modules/users/usersTableCtrl.js',
+            '/App/modules/users/usersTableDirective.js'
+        ]),
+        userModules: new module('userModules', []),
 
         hasAccessToManagement: function() {
-            if (!authInfo.isAuthenticated) {
-                return false;
-            }
-
-            var userMngModule = authInfo.modules["userMng"];
-            if (userMngModule && userMngModule.permission != "Prohibit") {
-                return true;
-            }
-
-            var moduleListModule = authInfo.modules["moduleList"];
-            if (moduleListModule && moduleListModule.permission != "Prohibit") {
-                return true;
-            }
-
-            return false;
+            return modules.users.canSee || modules.userModules.canSee;
         }
     };
     return modules;

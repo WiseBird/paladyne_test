@@ -5,14 +5,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Paladyne.Angularjs.Web.Infrastructure;
+using Paladyne.Angularjs.Web.Models;
+
 namespace Paladyne.Angularjs.Web.Controllers
 {
     public class ModulesController : ApiController
     {
-        // GET api/module
-        public IEnumerable<string> Get()
+        [ModuleAuthorize(Modules.userModules)]
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(new string[] { "value1", "value2" });
         }
 
         // GET api/module/5

@@ -22,7 +22,6 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInf
             authInfo.userId = null;
             authInfo.userName = null;
             authInfo.token = null;
-            authInfo.modules = [];
 
             $rootScope.$broadcast("auth:logged_out", authInfo);
         }
