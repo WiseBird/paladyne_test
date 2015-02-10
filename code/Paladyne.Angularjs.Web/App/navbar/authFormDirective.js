@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('ptNavbarAuthForm', function () {
+angular.module('main').directive('ptNavbarAuthForm', function () {
     return {
         restrict: 'E',
         replace: true,

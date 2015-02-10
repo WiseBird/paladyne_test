@@ -1,4 +1,4 @@
-﻿angular.module('welcome').controller('welcomeCtrl', function ($scope, welcomeData) {
+angular.module('welcome').controller('welcomeCtrl', ['$scope', 'welcomeData', function ($scope, welcomeData) {
     $scope.data = {
         ready: false,
         userName: null,
@@ -9,4 +9,4 @@
         $scope.data.lastLogin = data.lastLogin;
         $scope.data.ready = true;
     });
-});
+}]);

@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('ptIndexSomeLogo', function () {
+angular.module('main').directive('ptIndexSomeLogo', function () {
     return {
         restrict: 'E',
         replace: true,

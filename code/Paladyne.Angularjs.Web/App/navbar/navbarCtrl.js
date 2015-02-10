@@ -1,3 +1,3 @@
-﻿angular.module('main').controller('navbarCtrl', function($scope) {
+angular.module('main').controller('navbarCtrl', ['$scope', function($scope) {
 
-});
+}]);

@@ -1,4 +1,4 @@
-﻿angular.module('main').factory('auth', function ($rootScope, $http, popup, authInfo) {
+angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInfo', function ($rootScope, $http, popup, authInfo) {
     return {
         login: function (username, password) {
             var loginData = {
@@ -27,4 +27,4 @@
             $rootScope.$broadcast("auth:logged_out", authInfo);
         }
     };
-});
+}]);

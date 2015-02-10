@@ -1,4 +1,4 @@
-﻿angular.module('main').factory('modules', function ($q, $ocLazyLoad, $rootScope, authInfo) {
+angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'authInfo', function ($q, $ocLazyLoad, $rootScope, authInfo) {
     function module(id, files) {
         this.id = id;
         this.name = id;
@@ -74,4 +74,4 @@
         }
     };
     return modules;
-})
+}])

@@ -1,4 +1,4 @@
-﻿angular.module('main').factory('popup', function (toastr) {
+angular.module('main').factory('popup', ['toastr', function (toastr) {
     return {
         success: function (msg) {
             toastr.success(msg);
@@ -7,4 +7,4 @@
             toastr.error(msg);
         }
     }
-})
+}])

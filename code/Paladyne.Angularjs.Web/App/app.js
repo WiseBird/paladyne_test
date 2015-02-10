@@ -1,7 +1,7 @@
-﻿angular.module('main', ['ngRoute', 'oc.lazyLoad']);
+angular.module('main', ['ngRoute', 'oc.lazyLoad']);
 
-angular.module('main').config(function ($httpProvider, $provide) {
-    $provide.factory('addAuthTokenInterceptor', function (authInfo) {
+angular.module('main').config(['$httpProvider', '$provide', function ($httpProvider, $provide) {
+    $provide.factory('addAuthTokenInterceptor', ['authInfo', function (authInfo) {
         return {
             request: function (config) {
                 if (authInfo.token) {
@@ -11,10 +11,10 @@ angular.module('main').config(function ($httpProvider, $provide) {
                 return config;
             }
         }
-    });
+    }]);
 
     $httpProvider.interceptors.push('addAuthTokenInterceptor');
-});
+}]);
 
 angular.module('main').config([
     '$routeProvider', function ($routeProvider) {
@@ -46,7 +46,7 @@ angular.module('main').config([
 angular.module('main').value('toastr', toastr);
 angular.module('main').value('require', require);
 
-angular.module('main').run(function ($rootScope, $location, $route, authInfo) {
+angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', function ($rootScope, $location, $route, authInfo) {
     $rootScope.$on("$routeChangeStart", function (event, next) {
         if (!authInfo.isAuthenticated) {
             $location.path("/");
@@ -56,4 +56,4 @@ angular.module('main').run(function ($rootScope, $location, $route, authInfo) {
     $rootScope.$on("auth:logged_in", function () {
         $route.reload();
     });
-})
+}])

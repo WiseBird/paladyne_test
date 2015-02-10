@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('ptNavbarUserMenu', function () {
+angular.module('main').directive('ptNavbarUserMenu', function () {
     return {
         restrict: 'E',
         replace: true,

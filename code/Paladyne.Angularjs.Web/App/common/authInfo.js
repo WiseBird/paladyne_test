@@ -1,4 +1,4 @@
-﻿angular.module('main').factory('authInfo', function () {
+angular.module('main').factory('authInfo', function () {
     return {
         isAuthenticated: false,
         token: "",
