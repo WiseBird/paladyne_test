@@ -65,9 +65,9 @@
     <Compile Include="Includes\UserInclude.cs" />
     <Compile Include="Includes\UserModuleInclude.cs" />
     <Compile Include="Models\CreateUser.cs" />
-    <Compile Include="Models\CreateUserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\UserModuleService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

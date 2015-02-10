@@ -79,6 +79,7 @@ namespace Paladyne.Angularjs.Web.App_Start
 
             kernel.Bind<IUnitOfWork, DbContext>().To<Context>().InRequestScope();
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+            kernel.Bind<IUserModuleService>().To<UserModuleService>().InRequestScope();
         }        
     }
 }

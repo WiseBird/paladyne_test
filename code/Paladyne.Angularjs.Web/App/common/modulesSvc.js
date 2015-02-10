@@ -1,5 +1,5 @@
 angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'authInfo', function ($q, $ocLazyLoad, $rootScope, authInfo) {
-    function module(id, files) {
+    function Module(id, files) {
         this.id = id;
         this.name = id;
 
@@ -12,7 +12,7 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
         this.canSee = false;
         this.canEdit = false;
     }
-    module.prototype.load = function() {
+    Module.prototype.load = function () {
         if (this.loaded) {
             var defer = $q.defer();
             defer.resolve();
@@ -29,6 +29,31 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
         });
     }
 
+    var modules = {
+        welcome: new Module('welcome', [
+            '/App/modules/welcome/welcome.js',
+            '/App/modules/welcome/dataSrv.js',
+            '/App/modules/welcome/welcomeCtrl.js'
+        ]),
+        users: new Module('users', [
+            '/App/modules/users/usersSrv.js',
+            '/App/modules/users/usersTableCtrl.js',
+            '/App/modules/users/usersTableDirective.js'
+        ]),
+        userModules: new Module('userModules', [
+            '/App/modules/userModules/userModulesSrv.js',
+            '/App/modules/userModules/userModulesTableCtrl.js',
+            '/App/modules/userModules/userModulesTableDirective.js'
+        ]),
+
+        hasAccessToManagement: false
+    };
+
+    function updateModulesAcessProperties() {
+        modules.hasAccessToManagement = modules.users.canSee || modules.userModules.canSee;
+    }
+    updateModulesAcessProperties();
+
     $rootScope.$on("auth:logged_in", function (event, data) {
         for (var i = 0; i < data.modules.length; i++) {
             var mdl = data.modules[i];
@@ -42,7 +67,8 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
             modules[mdl.id].canEdit = mdl.permission == "Edit";
         }
 
-        $rootScope.$broadcast("modules:changed");
+        updateModulesAcessProperties();
+        //$rootScope.$broadcast("modules:changed");
     });
     $rootScope.$on("auth:logged_out", function () {
         for (var property in modules) {
@@ -50,35 +76,19 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
                 continue;
             }
 
-            if (!(modules[property] instanceof module)) {
+            if (!(modules[property] instanceof Module)) {
                 continue;
             }
 
-            var mdl = modules[property];
-            mdl.name = mdl.id;
-            mdl.canSee = false;
-            mdl.canEdit = false;
+            var module = modules[property];
+            module.name = module.id;
+            module.canSee = false;
+            module.canEdit = false;
         }
 
-        $rootScope.$broadcast("modules:changed");
+        updateModulesAcessProperties();
+        //$rootScope.$broadcast("modules:changed");
     });
 
-    var modules = {
-        welcome: new module('welcome', [
-            '/App/modules/welcome/welcome.js',
-            '/App/modules/welcome/dataSrv.js',
-            '/App/modules/welcome/welcomeCtrl.js'
-        ]),
-        users: new module('users', [
-            '/App/modules/users/usersSrv.js',
-            '/App/modules/users/usersTableCtrl.js',
-            '/App/modules/users/usersTableDirective.js'
-        ]),
-        userModules: new module('userModules', []),
-
-        hasAccessToManagement: function() {
-            return modules.users.canSee || modules.userModules.canSee;
-        }
-    };
     return modules;
 }])

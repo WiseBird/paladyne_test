@@ -171,7 +171,11 @@
     <Content Include="App\index\management.html" />
     <Content Include="App\index\managementCtrl.js" />
     <Content Include="App\index\someLogo.html" />
+    <Content Include="App\modules\userModules\userModulesSrv.js" />
     <Content Include="App\modules\userModules\userModules.js" />
+    <Content Include="App\modules\userModules\userModulesTable.html" />
+    <Content Include="App\modules\userModules\userModulesTableCtrl.js" />
+    <Content Include="App\modules\userModules\userModulesTableDirective.js" />
     <Content Include="App\modules\users\users.js" />
     <Content Include="App\modules\users\usersSrv.js" />
     <Content Include="App\modules\users\usersTable.html" />
@@ -1005,8 +1009,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\ocLazyLoad.js" />
-    <Content Include="Scripts\r.js" />
-    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -1020,7 +1022,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\UserModulesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Global.asax.cs">

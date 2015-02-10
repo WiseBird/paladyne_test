@@ -17,18 +17,17 @@
     <div class="container body-content">
         <div ng-view></div>
     </div>
-
+    
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
-    <script src="~/Scripts/require.js"></script>
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
     <script src="~/Scripts/angular-resource.js"></script>
     <script src="~/Scripts/ocLazyLoad.js"></script>
-    @*Html.Kendo().DeferredScripts()*@
-    
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.angular.min.js"></script>
+
     <script src="~/App/app.js"></script>
 
     <script src="~/App/common/popupSvc.js"></script>
@@ -46,28 +45,5 @@
     <script src="~/App/navbar/mainMenuDirective.js"></script>
     <script src="~/App/navbar/userMenuCtrl.js"></script>
     <script src="~/App/navbar/userMenuDirective.js"></script>
-
-    <script type="text/javascript">
-        var token = null;
-
-        $(function () {
-            $("#btnInvoke").click(function () {
-                var headers = {};
-                if (token) {
-                    headers.Authorization = 'Bearer ' + token;
-                }
-
-                $.ajax({
-                    type: 'GET',
-                    url: 'api/users/1',
-                    headers: headers
-                }).done(function (data) {
-                    console.log(data);
-                }).fail(function () {
-                    console.log(arguments);
-                });
-            });
-        });
-    </script>
 </body>
 </html>

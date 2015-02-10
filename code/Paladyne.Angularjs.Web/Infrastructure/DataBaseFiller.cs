@@ -40,6 +40,8 @@ namespace Paladyne.Angularjs.Web.Infrastructure
 
             var admin = new CreateUser()
                             {
+                                FirstName = "admin",
+                                LastName = "admin",
                                 UserName = Configuration.AdminUserName,
                                 Password = Configuration.AdminPassword,
                             };

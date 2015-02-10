@@ -12,10 +12,12 @@ namespace Paladyne.Angularjs.BL.Includes
     public class UserInclude : Include<User>
     {
         private bool userModules;
+        private bool granter;
 
-        public UserInclude UserModules()
+        public UserInclude UserModules(bool granter = false)
         {
             userModules = true;
+            granter = granter;
             return this;
         }
 
@@ -24,6 +26,10 @@ namespace Paladyne.Angularjs.BL.Includes
             if (userModules)
             {
                 query = query.Include(x => x.UserModules);
+            }
+            if (granter)
+            {
+                query = query.Include(x => x.UserModules.Select(y => y.Granter));
             }
 
             return base.Execute(query);

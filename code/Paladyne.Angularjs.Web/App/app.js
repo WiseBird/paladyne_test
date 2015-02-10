@@ -1,4 +1,4 @@
-﻿angular.module('main', ['ngRoute', 'ngResource', 'oc.lazyLoad']);
+angular.module('main', ['ngRoute', 'ngResource', 'oc.lazyLoad', 'kendo.directives']);
 
 angular.module('main').config(['$httpProvider', '$provide', function ($httpProvider, $provide) {
     $provide.factory('addAuthTokenInterceptor', ['authInfo', function (authInfo) {
@@ -40,7 +40,6 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
         });
         $routeProvider.when('/management', {
             templateUrl: '/App/index/management.html',
-            //controller: 'indexManagementCtrl'
             resolve: {
                 load: ['authInfo', 'modules', '$q', function (authInfo, modules, $q) {
                     if (!authInfo.isAuthenticated) {
@@ -68,9 +67,6 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
     }
 ]);
 
-angular.module('main').value('toastr', toastr);
-angular.module('main').value('require', require);
-
 angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', function ($rootScope, $location, $route, authInfo) {
     $rootScope.$on("$routeChangeStart", function (event, next) {
         var headintToTheRoot = next.$$route && (next.$$route.originalPath == "/");
@@ -86,4 +82,7 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', fun
     $rootScope.$on("auth:logged_out", function () {
         $route.reload();
     });
-}])
+}]);
+
+angular.module('main').value('toastr', toastr);
+angular.module('main').value('kendo', kendo);
