@@ -1,9 +1,8 @@
 ﻿<div ng-show="module.canSee || module.canEdit">
     <h1>{{ module.name }}</h1>
     <div kendo-grid="grid"
-        k-grid-hide-details="!module.canEdit"
         k-options="usersGridOptions">
-        <div k-detail-template ng-hide="false">
+        <div k-detail-template ng-if="module.canEdit" class="k-detail-template">
             <form ng-submit="save(dataItem)">
                 <div class="k-edit-form-container">
                     <div class="k-edit-label">

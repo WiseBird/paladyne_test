@@ -50,13 +50,10 @@ input[type="checkbox"].input-validation-error {
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
-.k-grid.kendo-grid-hide-details .k-hierarchy-col {
-    display: none;
-}
-.k-grid.kendo-grid-hide-details .k-hierarchy-cell {
-    display: none;
-}
-
 .k-edit-field .form-control {
     box-sizing: border-box;
+}
+
+.k-grid > .k-detail-template {
+    display: none;
 }
