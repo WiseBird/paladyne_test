@@ -1,4 +1,4 @@
-﻿angular.module('main').factory('account', ['$rootScope', '$http', 'popup', 'auth', function ($rootScope, $http, popup, auth) {
+angular.module('main').factory('account', ['$rootScope', '$http', 'popup', 'auth', function ($rootScope, $http, popup, auth) {
     return {
         register: function (userName, password, firstName, lastName) {
             var registerData = {

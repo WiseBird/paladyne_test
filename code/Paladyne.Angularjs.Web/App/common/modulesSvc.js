@@ -3,6 +3,7 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
         this.id = id;
         this.name = id;
 
+        this.url = '/api/' + id;
         this.view = 'App/modules/' + id + '/' + id + '.html';
 
         this.files = files.slice();
@@ -41,7 +42,6 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
             '/App/modules/users/usersTableDirective.js'
         ]),
         userModules: new Module('userModules', [
-            '/App/modules/userModules/userModulesSrv.js',
             '/App/modules/userModules/userModulesTableCtrl.js',
             '/App/modules/userModules/userModulesTableDirective.js'
         ]),

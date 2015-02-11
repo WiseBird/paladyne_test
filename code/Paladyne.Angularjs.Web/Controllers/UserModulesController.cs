@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 
 using Ninject;
 
@@ -12,6 +13,7 @@ using Paladyne.Angularjs.BL.Services;
 using Paladyne.Angularjs.DAL.Entities;
 using Paladyne.Angularjs.Web.Infrastructure;
 using Paladyne.Angularjs.Web.Models;
+using Paladyne.Angularjs.Web.Models.UserModules;
 
 namespace Paladyne.Angularjs.Web.Controllers
 {
@@ -19,6 +21,8 @@ namespace Paladyne.Angularjs.Web.Controllers
     {
         [Inject]
         public IUserService UserService { get; set; }
+        [Inject]
+        public IUserModuleService UserModuleService { get; set; }
 
         [ModuleAuthorize(Modules.userModules)]
         public IHttpActionResult Get()
@@ -32,19 +36,32 @@ namespace Paladyne.Angularjs.Web.Controllers
             }));
         }
 
-        // POST api/module
-        public void Post([FromBody]string value)
+        [ModuleAuthorize(Modules.userModules, Permissions.Edit)]
+        public IHttpActionResult Put(string id, [FromBody]UpdateUserModule model)
         {
-        }
+            var user = UserService.GetByName(User.Identity.Name);
+            if (user == null)
+            {
+                return this.StatusCode(HttpStatusCode.Unauthorized);
+            }
 
-        // PUT api/module/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+            var blModel = new BL.Models.UpdateUserModule()
+                              {
+                                  UserId = user.Id,
+                                  ModuleId = id,
+                                  ModuleName = model.Name
+                              };
 
-        // DELETE api/module/5
-        public void Delete(int id)
-        {
+            var errors = new List<string>();
+            UserModuleService.Update(blModel, new ValidationErrors(errors));
+            if (errors.Count != 0)
+            {
+                return new ServiceErrorsResult(errors);
+            }
+            else
+            {
+                return this.StatusCode(HttpStatusCode.NoContent);
+            }
         }
     }
 }

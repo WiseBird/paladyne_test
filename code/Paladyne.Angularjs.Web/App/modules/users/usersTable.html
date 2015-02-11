@@ -1,5 +1,5 @@
-﻿<div>
-    <h1>Users</h1>
+﻿<div ng-show="module.canSee || module.canEdit">
+    <h1>{{ module.name }}</h1>
     <div kendo-grid
          k-options="usersGridOptions" 
          k-ng-delay="usersGridOptions.dataSource"

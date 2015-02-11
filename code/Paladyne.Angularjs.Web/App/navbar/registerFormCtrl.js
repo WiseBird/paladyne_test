@@ -1,4 +1,4 @@
-﻿angular.module('main').controller('navbarRegisterFormCtrl', ['$scope', 'authInfo', 'account', function ($scope, authInfo, account) {
+angular.module('main').controller('navbarRegisterFormCtrl', ['$scope', 'authInfo', 'account', function ($scope, authInfo, account) {
     $scope.authInfo = authInfo;
 
     $scope.data = {

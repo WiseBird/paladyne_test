@@ -67,7 +67,15 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
     }
 ]);
 
-angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', function ($rootScope, $location, $route, authInfo) {
+angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'jQuery', function ($rootScope, $location, $route, authInfo, jQuery) {
+    jQuery.ajaxSetup({
+        beforeSend: function (req) {
+            if (authInfo.token) {
+                req.setRequestHeader('Authorization', 'Bearer ' + authInfo.token);
+            }
+        }
+    });
+
     $rootScope.$on("$routeChangeStart", function (event, next) {
         var headintToTheRoot = next.$$route && (next.$$route.originalPath == "/");
         if (!authInfo.isAuthenticated && !headintToTheRoot) {
@@ -86,3 +94,4 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', fun
 
 angular.module('main').value('toastr', toastr);
 angular.module('main').value('kendo', kendo);
+angular.module('main').value('jQuery', jQuery);

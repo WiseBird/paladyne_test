@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('ptNavbarRegisterForm', function () {
+angular.module('main').directive('ptNavbarRegisterForm', function () {
     return {
         restrict: 'E',
         replace: true,
