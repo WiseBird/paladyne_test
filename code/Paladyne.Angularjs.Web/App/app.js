@@ -23,14 +23,14 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
                 var authInfo = injector.get('authInfo');
                 var modules = injector.get('modules');
 
-                if (authInfo.isAuthenticated) {
+                if (authInfo.isAuthenticated && modules.welcome.canSee) {
                     return modules.welcome.view;
                 }
 
                 return "/App/index/someLogo.html";
             }, resolve: {
                 load: ['authInfo', 'modules', function (authInfo, modules) {
-                    if (!authInfo.isAuthenticated) {
+                    if (!authInfo.isAuthenticated || !modules.welcome.canSee) {
                         return undefined;
                     }
 

@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('kGridHideColumn', function (jQuery) {
+﻿angular.module('main').directive('kGridHideColumn', ['jQuery', function (jQuery) {
     function link(scope, element, attrs) {
         var grid = null;
         var hidden = false;
@@ -15,12 +15,12 @@
 
             scope.$watch(attrs['kGridHideColumn'], function (options) {
                 if (hidden != options.hide) {
+                    hidden = !hidden;
                     if (options.hide) {
                         grid.hideColumn(options.column);
                     } else {
                         grid.showColumn(options.column);
                     }
-                    hidden = !hidden;
                 }
             }, true);
         });
@@ -28,4 +28,4 @@
     return {
         link: link
     };
-});
+}]);
