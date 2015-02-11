@@ -1,4 +1,4 @@
-angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'kendo', function ($scope, modules, kendo) {
+angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'errorHandler', function ($scope, modules, errorHandler) {
     $scope.module = modules.userModules;
 
     function getIdentityUrl(data) {
@@ -9,7 +9,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
         columns: [
             { field: "name", title: "Name" },
             { field: "granter", title: "Granter" },
-            { command: ["edit"], title: "&nbsp;", width: "250px" }
+            { command: ["edit"], title: "&nbsp;", width: "250px", hidden: !$scope.module.canEdit }
         ],
         editable: "inline",
         dataSource: {
@@ -34,7 +34,12 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
                         granter: { editable: false }
                     }
                 }
-            }
+            }, 
+            error: errorHandler
+        },
+        save: function (e) {
+            var model = e.model;
+            modules.setModuleName(model.id, model.name);
         }
     };
 }]);

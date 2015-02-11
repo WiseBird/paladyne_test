@@ -169,6 +169,7 @@
     <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
+    <Content Include="App\common\errorHandlerSrv.js" />
     <Content Include="App\common\modulesSvc.js" />
     <Content Include="App\common\permissionsSrv.js" />
     <Content Include="App\index\management.html" />

@@ -44,7 +44,7 @@ namespace Paladyne.Angularjs.Web.Controllers
             var user = UserService.GetByNameAndPasswordEx(username, password, new UserInclude().UserModules());
             if (user == null)
             {
-                return this.HttpNotFound();
+                return new ServiceErrorsResult("Invalid login or password");
             }
 
             SetAuthCookie(user);

@@ -30,7 +30,7 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         });
     }
 
-    var modules = {
+    var service = {
         welcome: new Module('welcome', [
             '/App/modules/welcome/welcome.js',
             '/App/modules/welcome/dataSrv.js',
@@ -46,11 +46,19 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
             '/App/modules/userModules/userModulesTableDirective.js'
         ]),
 
-        hasAccessToManagement: false
+        hasAccessToManagement: false,
+        setModuleName: function(id, name) {
+            if (!service[id]) {
+                return;
+            }
+
+            service[id].name = name;
+        }
     };
+    var modules = [service.welcome, service.users, service.userModules];
 
     function updateModulesAcessProperties() {
-        modules.hasAccessToManagement = modules.users.canSee || modules.userModules.canSee;
+        service.hasAccessToManagement = service.users.canSee || service.userModules.canSee;
     }
     updateModulesAcessProperties();
 
@@ -58,36 +66,28 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         for (var i = 0; i < data.modules.length; i++) {
             var mdl = data.modules[i];
 
-            if (!modules[mdl.id]) {
+            if (!service[mdl.id]) {
                 continue;
             }
 
-            modules[mdl.id].name = mdl.name;
-            modules[mdl.id].canSee = mdl.permission != permissions.prohibit;
-            modules[mdl.id].canEdit = mdl.permission == permissions.edit;
+            service[mdl.id].name = mdl.name;
+            service[mdl.id].canSee = mdl.permission != permissions.prohibit;
+            service[mdl.id].canEdit = mdl.permission == permissions.edit;
         }
 
         updateModulesAcessProperties();
-        //$rootScope.$broadcast("modules:changed");
     });
     $rootScope.$on("auth:logged_out", function () {
-        var keys = Object.keys(modules);
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
+        for (var i = 0; i < modules.length; i++) {
+            var module = modules[i];
 
-            if (!(modules[key] instanceof Module)) {
-                continue;
-            }
-
-            var module = modules[key];
             module.name = module.id;
             module.canSee = false;
             module.canEdit = false;
         }
 
         updateModulesAcessProperties();
-        //$rootScope.$broadcast("modules:changed");
     });
 
-    return modules;
+    return service;
 }])

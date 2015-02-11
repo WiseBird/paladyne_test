@@ -1,4 +1,4 @@
-angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInfo', function ($rootScope, $http, popup, authInfo) {
+angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInfo', 'errorHandler', function ($rootScope, $http, popup, authInfo, errorHandler) {
     return {
         login: function (username, password) {
             var loginData = {
@@ -13,10 +13,7 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInf
                 authInfo.token = data.token;
 
                 $rootScope.$broadcast("auth:logged_in", data);
-            }).error(function () {
-                console.log(arguments);
-                popup.error("Invalid login or password");
-            });
+            }).error(errorHandler);
         },
         logout: function() {
             authInfo.isAuthenticated = false;

@@ -13,7 +13,8 @@ namespace Paladyne.Angularjs.DAL.Entities
     {
         public User()
         {
-            UserModules = new List<UserModule>( );
+            UserModules = new List<UserModule>();
+            Granted = new List<UserModule>();
         }
 
         [Required]
@@ -22,6 +23,7 @@ namespace Paladyne.Angularjs.DAL.Entities
         public string LastName { get; set; }
         public DateTime? LastLogin { get; set; }
 
-        public virtual List<UserModule> UserModules { get; set; } 
+        public virtual List<UserModule> UserModules { get; set; }
+        public virtual List<UserModule> Granted { get; set; }
     }
 }

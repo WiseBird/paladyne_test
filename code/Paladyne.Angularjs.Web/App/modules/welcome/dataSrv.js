@@ -1,10 +1,7 @@
-angular.module('welcome').factory('welcomeData', ['$http', 'popup', function ($http, popup) {
+angular.module('welcome').factory('welcomeData', ['$http', 'errorHandler', function ($http, errorHandler) {
     return {
         load: function () {
-            return $http.get('/api/welcome').error(function () {
-                console.log(arguments);
-                popup.error("Error while retrieving welcome data");
-            });
+            return $http.get('/api/welcome').error(errorHandler);
         }
     };
 }]);

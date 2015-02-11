@@ -22,6 +22,15 @@ namespace Paladyne.Angularjs.DAL
             Configuration.LazyLoadingEnabled = false;
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserModule>()
+                .HasOptional(x => x.Granter)
+                .WithMany(x => x.Granted);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public IDbSet<UserModule> UserModules { get; set; }
     }
 }

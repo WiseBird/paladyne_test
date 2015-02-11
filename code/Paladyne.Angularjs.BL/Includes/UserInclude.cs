@@ -17,7 +17,7 @@ namespace Paladyne.Angularjs.BL.Includes
         public UserInclude UserModules(bool granter = false)
         {
             userModules = true;
-            granter = granter;
+            this.granter = granter;
             return this;
         }
 

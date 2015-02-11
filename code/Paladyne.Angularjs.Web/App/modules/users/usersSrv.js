@@ -1,4 +1,4 @@
-angular.module('users').factory('users', ['$http', 'modules', 'popup', function ($http, modules, popup) {
+angular.module('users').factory('users', ['$http', 'modules', 'errorHandler', function ($http, modules, errorHandler) {
     return {
         save: function (user) {
             var data = {
@@ -16,17 +16,7 @@ angular.module('users').factory('users', ['$http', 'modules', 'popup', function 
             }
 
             $http.put(modules.users.url + '/' + user.id, user).success(function () {
-            }).error(function (errors) {
-                console.log(arguments);
-                if (Array.isArray(errors)) {
-                    for (var i = 0; i < errors.length; i++) {
-                        var error = errors[i];
-                        popup.error(error);
-                    }
-                } else {
-                    popup.error("Error during user save");
-                }
-            });
+            }).error(errorHandler);
         }
     }
 }]);
