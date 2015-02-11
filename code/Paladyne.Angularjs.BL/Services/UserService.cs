@@ -28,6 +28,7 @@ namespace Paladyne.Angularjs.BL.Services
         List<User> GetAll(Include<User> include);
 
         void Create(CreateUser model, IValidationErrors errors);
+        void Update(UpdateUserData model, IValidationErrors errors);
     }
 
     public class UserService : BaseService, IUserService
@@ -115,6 +116,34 @@ namespace Paladyne.Angularjs.BL.Services
                 errors.AddErrorsFromResult(result);
                 return;
             }
+        }
+
+        public void Update(UpdateUserData model, IValidationErrors errors)
+        {
+            if (!model.Validate(errors))
+            {
+                return;
+            }
+
+            var user = UnitOfWork.Users.Include(x => x.UserModules).FirstOrDefault(x => x.Id == model.UserId);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            model.MapTo(user);
+            foreach (var userModule in user.UserModules)
+            {
+                var modelUserModule = model.Modules.FirstOrDefault(x => x.ModuleId == userModule.ModuleId);
+                if (modelUserModule == null)
+                {
+                    continue;
+                }
+
+                modelUserModule.MapTo(userModule);
+            }
+
+            UnitOfWork.SaveChanges();
         }
     }
 }

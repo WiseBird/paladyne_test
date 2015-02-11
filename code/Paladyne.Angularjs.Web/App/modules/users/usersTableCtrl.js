@@ -1,30 +1,29 @@
-angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'users', 'kendo', function ($scope, modules, users, kendo) {
+angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'users', 'permissions', function ($scope, modules, users, permissions) {
     $scope.module = modules.users;
+    $scope.permissions = permissions.array;
+    
     $scope.usersGridOptions = {
         columns: [
             { field: "firstName", title: "First name" },
             { field: "lastName", title: "Last name" },
-            {
-                field: "modules", title: "Modules",
-                template: "#=moduleList#"
+            { field: "modules", title: "Modules", 
+                template: function(user) {
+                    return user.modules
+                        .filter(function (x) { return x.permission != permissions.prohibit; })
+                        .map(function (x) { return x.name; })
+                        .join(", ");
+                }
             }
-        ]
+        ],
+        dataSource: {
+            transport: {
+                read: $scope.module.url
+            }
+        }
     };
 
-    users.query().$promise.then(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var user = data[i];
-            user.moduleList = user.modules
-                .filter(function(x) { return x.permission != "Prohibit"; })
-                .map(function (x) { return x.name; })
-                .join(", ");
-        }
-
-        $scope.array = new kendo.data.ObservableArray(data);
-        $scope.usersGridOptions.dataSource = new kendo.data.DataSource({
-            data: $scope.array
-        });
-    });
-
-    //$scope.array[0].set("firstName", "1TB");
+    $scope.save = function(user) {
+        users.save(user);
+        $scope.grid.refresh();
+    }
 }]);

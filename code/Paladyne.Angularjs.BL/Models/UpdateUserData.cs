@@ -9,32 +9,27 @@ using Paladyne.Angularjs.DAL.Entities;
 
 namespace Paladyne.Angularjs.BL.Models
 {
-    public class CreateUser : IValidatableObject
+    public class UpdateUserData : IValidatableObject
     {
         public class UserModule
         {
             [Required]
             public string ModuleId { get; set; }
-            [Required]
-            public string ModuleName { get; set; }
             public Permissions Permission { get; set; }
             public string GranterId { get; set; }
         }
 
-        public CreateUser()
+        public UpdateUserData()
         {
             Modules = new List<UserModule>();
         }
 
-        public string UserId { get; set; }
         [Required]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
-        public string Password { get; set; }
 
         public List<UserModule> Modules { get; set; }
 

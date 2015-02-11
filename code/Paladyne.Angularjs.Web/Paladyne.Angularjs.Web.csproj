@@ -169,11 +169,12 @@
     <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
+    <Content Include="App\common\kendoGridHideDetailsDirective.js" />
     <Content Include="App\common\modulesSvc.js" />
+    <Content Include="App\common\permissionsSrv.js" />
     <Content Include="App\index\management.html" />
     <Content Include="App\index\managementCtrl.js" />
     <Content Include="App\index\someLogo.html" />
-    <Content Include="App\modules\userModules\userModulesSrv.js" />
     <Content Include="App\modules\userModules\userModules.js" />
     <Content Include="App\modules\userModules\userModulesTable.html" />
     <Content Include="App\modules\userModules\userModulesTableCtrl.js" />
@@ -1043,6 +1044,7 @@
     <Compile Include="Models\Account\RegisterUser.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\UserModules\UpdateUserModule.cs" />
+    <Compile Include="Models\Users\UpdateUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

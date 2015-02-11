@@ -4,6 +4,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
     function getIdentityUrl(data) {
         return $scope.module.url + "/" + data.id;
     }
+
     $scope.userModulesGridOptions = {
         columns: [
             { field: "name", title: "Name" },

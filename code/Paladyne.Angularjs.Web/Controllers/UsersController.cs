@@ -13,6 +13,7 @@ using Paladyne.Angularjs.BL.Services;
 using Paladyne.Angularjs.DAL.Entities;
 using Paladyne.Angularjs.Web.Infrastructure;
 using Paladyne.Angularjs.Web.Models;
+using Paladyne.Angularjs.Web.Models.Users;
 
 namespace Paladyne.Angularjs.Web.Controllers
 {
@@ -27,18 +28,46 @@ namespace Paladyne.Angularjs.Web.Controllers
             var users = UserService.GetAll(new UserInclude().UserModules());
             return Ok(users.Select(x => new
                                             {
+                                                id = x.Id,
                                                 firstName = x.FirstName,
                                                 lastName = x.LastName,
-                                                modules = x.UserModules.Where(y => y.Permission != Permissions.Prohibit)
+                                                modules = x.UserModules
                                                     .Select(y => new { id = y.ModuleId, name = y.ModuleName, permission = y.Permission.ToString()})
                                             }));
         }
 
-        [ModuleAuthorize(Modules.users)]
-        public IHttpActionResult Get(int id)
+        [ModuleAuthorize(Modules.users, Permissions.Edit)]
+        public IHttpActionResult Put(string id, [FromBody] UpdateUserData model)
         {
-            var users = UserService.GetAll(new UserInclude());
-            return Ok(users);
+            var user = UserService.GetByName(User.Identity.Name);
+            if (user == null)
+            {
+                return this.StatusCode(HttpStatusCode.Unauthorized);
+            }
+
+            var blModel = new BL.Models.UpdateUserData()
+            {
+                UserId = model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Modules = model.Modules.Select(x => new BL.Models.UpdateUserData.UserModule()
+                                                        {
+                                                            ModuleId = x.Id,
+                                                            Permission = x.Permission,
+                                                            GranterId = user.Id
+                                                        }).ToList()
+            };
+
+            var errors = new List<string>();
+            UserService.Update(blModel, new ValidationErrors(errors));
+            if (errors.Count != 0)
+            {
+                return new ServiceErrorsResult(errors);
+            }
+            else
+            {
+                return this.StatusCode(HttpStatusCode.NoContent);
+            }
         }
     }
 }

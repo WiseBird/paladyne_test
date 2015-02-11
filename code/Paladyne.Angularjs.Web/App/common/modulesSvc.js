@@ -1,4 +1,4 @@
-angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'authInfo', function ($q, $ocLazyLoad, $rootScope, authInfo) {
+angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'permissions', function ($q, $ocLazyLoad, $rootScope, permissions) {
     function Module(id, files) {
         this.id = id;
         this.name = id;
@@ -63,24 +63,23 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'a
             }
 
             modules[mdl.id].name = mdl.name;
-            modules[mdl.id].canSee = mdl.permission != "Prohibit";
-            modules[mdl.id].canEdit = mdl.permission == "Edit";
+            modules[mdl.id].canSee = mdl.permission != permissions.prohibit;
+            modules[mdl.id].canEdit = mdl.permission == permissions.edit;
         }
 
         updateModulesAcessProperties();
         //$rootScope.$broadcast("modules:changed");
     });
     $rootScope.$on("auth:logged_out", function () {
-        for (var property in modules) {
-            if (!modules.hasOwnProperty(property)) {
+        var keys = Object.keys(modules);
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i];
+
+            if (!(modules[key] instanceof Module)) {
                 continue;
             }
 
-            if (!(modules[property] instanceof Module)) {
-                continue;
-            }
-
-            var module = modules[property];
+            var module = modules[key];
             module.name = module.id;
             module.canSee = false;
             module.canEdit = false;

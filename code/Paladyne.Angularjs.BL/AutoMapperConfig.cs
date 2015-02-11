@@ -30,8 +30,10 @@ namespace Paladyne.Angularjs.BL
 
             Mapper.CreateMap<CreateUser.UserModule, UserModule>();
 
-
             Mapper.CreateMap<UpdateUserModule, UserModule>();
+
+            Mapper.CreateMap<UpdateUserData, User>();
+            Mapper.CreateMap<UpdateUserData.UserModule, UserModule>();
         }
     }
 }
