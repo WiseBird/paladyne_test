@@ -1,5 +1,8 @@
 angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'errorHandler', function ($scope, modules, errorHandler) {
     $scope.module = modules.userModules;
+    if (!$scope.module.canSee && !$scope.module.canEdit) {
+        return;
+    }
 
     function getIdentityUrl(data) {
         return $scope.module.url + "/" + data.id;
@@ -9,7 +12,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
         columns: [
             { field: "name", title: "Name" },
             { field: "granter", title: "Granter" },
-            { command: ["edit"], title: "&nbsp;", width: "250px", hidden: !$scope.module.canEdit }
+            { command: ["edit"], title: "&nbsp;", width: "250px" }
         ],
         editable: "inline",
         dataSource: {

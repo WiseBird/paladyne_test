@@ -1,6 +1,7 @@
 ﻿<div ng-show="module.canSee || module.canEdit">
     <h1>{{ module.name }}</h1>
-    <div kendo-grid
+    <div kendo-grid="grid"
+         k-grid-hide-column="{ column: 2, hide: !module.canEdit }"
          k-options="userModulesGridOptions"
          k-selectable="true">
     </div>

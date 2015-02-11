@@ -53,6 +53,21 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
             }
 
             service[id].name = name;
+        },
+        setModules: function(mdls) {
+            for (var i = 0; i < mdls.length; i++) {
+                var mdl = mdls[i];
+
+                if (!service[mdl.id]) {
+                    continue;
+                }
+
+                service[mdl.id].name = mdl.name;
+                service[mdl.id].canSee = mdl.permission != permissions.prohibit;
+                service[mdl.id].canEdit = mdl.permission == permissions.edit;
+            }
+
+            updateModulesAcessProperties();
         }
     };
     var modules = [service.welcome, service.users, service.userModules];
@@ -63,19 +78,7 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
     updateModulesAcessProperties();
 
     $rootScope.$on("auth:logged_in", function (event, data) {
-        for (var i = 0; i < data.modules.length; i++) {
-            var mdl = data.modules[i];
-
-            if (!service[mdl.id]) {
-                continue;
-            }
-
-            service[mdl.id].name = mdl.name;
-            service[mdl.id].canSee = mdl.permission != permissions.prohibit;
-            service[mdl.id].canEdit = mdl.permission == permissions.edit;
-        }
-
-        updateModulesAcessProperties();
+        service.setModules(data.modules);
     });
     $rootScope.$on("auth:logged_out", function () {
         for (var i = 0; i < modules.length; i++) {

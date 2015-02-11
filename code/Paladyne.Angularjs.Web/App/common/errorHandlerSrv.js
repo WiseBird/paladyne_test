@@ -24,7 +24,7 @@ angular.module('main').factory('errorHandler', ['popup', function (popup) {
             }
         }
 
-        if (arguments[1] && arguments[1] == 404) {
+        if (arguments[1] && arguments[1] == 401) {
             popup.error("Access denied");
             return;
         }
