@@ -3,6 +3,7 @@ angular.module('main').directive('ptNavbarAuthForm', function () {
         restrict: 'E',
         replace: true,
         templateUrl: '/App/navbar/authForm.html',
-        controller: 'navbarAuthFormCtrl'
+        controller: 'navbarAuthFormCtrl',
+        scope: true
     }
 });

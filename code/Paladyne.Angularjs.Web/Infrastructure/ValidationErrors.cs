@@ -12,6 +12,9 @@ namespace Paladyne.Angularjs.Web.Infrastructure
         private Action<string, string> onError = null;
         private bool hasErrors = false;
 
+        public ValidationErrors(List<string> errors)
+            : this((p,e) => errors.Add(e))
+        { }
         public ValidationErrors(Action<string, string> onError)
         {
             this.onError = onError;

@@ -3,6 +3,7 @@ angular.module('users').directive('ptUsersTable', function () {
         restrict: 'E',
         replace: true,
         templateUrl: '/App/modules/users/usersTable.html',
-        controller: 'usersTableCtrl'
+        controller: 'usersTableCtrl',
+        scope: true
     }
 });

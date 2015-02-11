@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
     <Content Include="App\common\modulesSvc.js" />
@@ -192,6 +193,9 @@
     <Content Include="App\navbar\mainMenuCtrl.js" />
     <Content Include="App\navbar\mainMenuDirective.js" />
     <Content Include="App\common\popupSvc.js" />
+    <Content Include="App\navbar\registerForm.html" />
+    <Content Include="App\navbar\registerFormCtrl.js" />
+    <Content Include="App\navbar\registerFormDirective.js" />
     <Content Include="App\navbar\userMenu.html" />
     <Content Include="App\navbar\userMenuCtrl.js" />
     <Content Include="App\navbar\userMenuDirective.js" />
@@ -1033,7 +1037,9 @@
     <Compile Include="Infrastructure\DataBaseInitializer.cs" />
     <Compile Include="Infrastructure\ModuleAuthorize.cs" />
     <Compile Include="Infrastructure\ModulesSourceProtectionHandler.cs" />
+    <Compile Include="Infrastructure\ServiceErrorsResult.cs" />
     <Compile Include="Infrastructure\ValidationErrors.cs" />
+    <Compile Include="Models\Account\RegisterUser.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

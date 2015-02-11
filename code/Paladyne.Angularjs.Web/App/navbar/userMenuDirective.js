@@ -3,6 +3,7 @@ angular.module('main').directive('ptNavbarUserMenu', function () {
         restrict: 'E',
         replace: true,
         templateUrl: '/App/navbar/userMenu.html',
-        controller: 'navbarUserMenuCtrl'
+        controller: 'navbarUserMenuCtrl',
+        scope: true
     }
 });

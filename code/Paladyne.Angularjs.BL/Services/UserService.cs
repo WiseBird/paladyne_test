@@ -97,6 +97,12 @@ namespace Paladyne.Angularjs.BL.Services
                 return;
             }
 
+            if (UnitOfWork.Users.Any(x => x.UserName == model.UserName))
+            {
+                errors.Add("UserName", "UserName is already taken");
+                return;
+            }
+
             var user = model.MapTo<User>();
             foreach (var userModule in user.UserModules)
             {

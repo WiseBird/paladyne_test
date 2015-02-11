@@ -1,15 +1,29 @@
 ﻿<ul class="nav navbar-nav navbar-right" ng-hide="authInfo.isAuthenticated">
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In<span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Log In<span class="caret"></span></a>
         <div class="dropdown-menu dropdown-menu-with-form">
-            <form ng-submit="submit()">
+            <form ng-submit="submit()" novalidate name="loginForm">
                 <div class="form-group">
-                    <input name="username" type="text" class="form-control" placeholder="UserName" ng-model="data.username">
+                    <input 
+                        name="username" 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="UserName" 
+                        ng-model="data.username"
+                        required>
+                    <span ng-show="loginForm.username.$invalid && !loginForm.username.$pristine" class="label label-danger">Username is required.</span>
                 </div>
                 <div class="form-group">
-                    <input name="password" type="password" class="form-control" placeholder="Password" ng-model="data.password">
+                    <input 
+                        name="password" 
+                        type="password"
+                        class="form-control" 
+                        placeholder="Password"
+                        ng-model="data.password"
+                        required>
+                    <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="label label-danger">Password is required.</span>
                 </div>
-                <button id="btnLogin" class="btn btn-success" type="submit">Sign in</button>
+                <button id="btnLogin" class="btn btn-success" type="submit" ng-disabled="loginForm.$invalid">Log in</button>
             </form>
         </div>
     </li>

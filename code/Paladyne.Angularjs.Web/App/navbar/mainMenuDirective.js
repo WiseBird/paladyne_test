@@ -3,6 +3,7 @@ angular.module('main').directive('ptNavbarMainMenu', function () {
         restrict: 'E',
         replace: true,
         templateUrl: '/App/navbar/mainMenu.html',
-        controller: 'navbarMainMenuCtrl'
+        controller: 'navbarMainMenuCtrl',
+        scope: true
     }
 });

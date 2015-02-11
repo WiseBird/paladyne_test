@@ -1,4 +1,4 @@
-﻿angular.module('users').controller('usersTableCtrl', ['$scope', 'users', 'kendo', function ($scope, users, kendo) {
+angular.module('users').controller('usersTableCtrl', ['$scope', 'users', 'kendo', function ($scope, users, kendo) {
     $scope.usersGridOptions = {
         columns: [
             { field: "firstName", title: "First name" },

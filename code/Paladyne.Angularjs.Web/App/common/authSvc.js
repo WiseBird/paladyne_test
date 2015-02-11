@@ -14,6 +14,7 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInf
 
                 $rootScope.$broadcast("auth:logged_in", data);
             }).error(function () {
+                console.log(arguments);
                 popup.error("Invalid login or password");
             });
         },
