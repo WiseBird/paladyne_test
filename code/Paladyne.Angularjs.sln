@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.DAL.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.BL.Tests", "Paladyne.Angularjs.BL.Tests\Paladyne.Angularjs.BL.Tests.csproj", "{EA8FC565-7CE5-4558-8310-06DD4EC48775}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.Web.Tests", "Paladyne.Angularjs.Web.Tests\Paladyne.Angularjs.Web.Tests.csproj", "{2EE97971-FA69-47BA-B598-342CB79306E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D25DFFF4-94B3-46FA-8C85-9FF1A197A93A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +44,10 @@ Global
 		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE97971-FA69-47BA-B598-342CB79306E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE97971-FA69-47BA-B598-342CB79306E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE97971-FA69-47BA-B598-342CB79306E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE97971-FA69-47BA-B598-342CB79306E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
