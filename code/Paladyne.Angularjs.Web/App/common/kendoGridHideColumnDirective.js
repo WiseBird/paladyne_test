@@ -26,6 +26,7 @@ angular.module('main').directive('kGridHideColumn', ['jQuery', function (jQuery)
         });
     }
     return {
+        restrict: 'A',
         link: link
     };
 }]);

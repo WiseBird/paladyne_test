@@ -3,6 +3,9 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
     $scope.modules = modules;
     $scope.module = modules.users;
     $scope.permissions = permissions;
+    if (!$scope.module.canSee) {
+        return;
+    }
 
     $scope.usersGridOptions = {
         columns: [

@@ -17,51 +17,8 @@ angular.module('main').config(['$httpProvider', '$provide', function ($httpProvi
 }]);
 
 angular.module('main').config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        $routeProvider.when('/', {
-            templateUrl: function () {
-                var injector = angular.element('*[ng-app]').injector();
-                var authInfo = injector.get('authInfo');
-                var modules = injector.get('modules');
-
-                if (!authInfo.isAuthenticated) {
-                    return "/App/index/someLogo.html";
-                }
-
-                if (modules.welcome.canSee) {
-                    return modules.welcome.view;
-                }
-
-                return undefined;
-            }, resolve: {
-                load: ['authInfo', 'modules', function (authInfo, modules) {
-                    if (!modules.welcome.canSee) {
-                        return undefined;
-                    }
-
-                    return modules.welcome.load();
-                }]
-            }
-        });
-        $routeProvider.when('/management', {
-            templateUrl: '/App/index/management.html',
-            resolve: {
-                load: ['authInfo', 'modules', '$q', function (authInfo, modules, $q) {
-                    if (!modules.hasAccessToManagement) {
-                        return undefined;
-                    }
-
-                    var promises = [];
-                    if (modules.users.canSee) {
-                        promises.push(modules.users.load());
-                    }
-                    if (modules.userModules.canSee) {
-                        promises.push(modules.userModules.load());
-                    }
-
-                    return $q.all(promises);
-                }]
-            }
-        });
+        $routeProvider.when('/', { templateUrl: "/App/pages/index.html" });
+        $routeProvider.when('/management', { templateUrl: '/App/pages/management.html' });
         $routeProvider.otherwise({ redirectTo: '/' });
 
         $locationProvider.html5Mode({

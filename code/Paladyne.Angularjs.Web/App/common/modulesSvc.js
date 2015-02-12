@@ -34,7 +34,8 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         welcome: new Module('welcome', [
             '/App/modules/welcome/welcome.js',
             '/App/modules/welcome/dataSrv.js',
-            '/App/modules/welcome/welcomeCtrl.js'
+            '/App/modules/welcome/welcomeCtrl.js',
+            '/App/modules/welcome/welcomeDirective.js'
         ]),
         users: new Module('users', [
             '/App/modules/users/usersSrv.js',
@@ -68,8 +69,6 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
             }
 
             updateModulesAcessProperties();
-
-            $rootScope.$broadcast("modules:changed");
         }
     };
     var modules = [service.welcome, service.users, service.userModules];
@@ -92,8 +91,6 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         }
 
         updateModulesAcessProperties();
-
-        $rootScope.$broadcast("modules:changed");
     });
 
     return service;

@@ -24,6 +24,7 @@ angular.module('main').directive('kGridHideDetails', ['jQuery', function (jQuery
         });
     }
     return {
+        restrict: 'A',
         link: link
     };
 }]);
