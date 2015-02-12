@@ -71,7 +71,7 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
             updateModulesAcessProperties();
         }
     };
-    var modules = [service.welcome, service.users, service.userModules];
+    service.array = [service.welcome, service.users, service.userModules];
 
     function updateModulesAcessProperties() {
         service.hasAccessToManagement = service.users.canSee || service.userModules.canSee;
@@ -82,8 +82,8 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         service.setModules(data.modules);
     });
     $rootScope.$on("auth:logged_out", function () {
-        for (var i = 0; i < modules.length; i++) {
-            var module = modules[i];
+        for (var i = 0; i < service.array.length; i++) {
+            var module = service.array[i];
 
             module.name = module.id;
             module.canSee = false;

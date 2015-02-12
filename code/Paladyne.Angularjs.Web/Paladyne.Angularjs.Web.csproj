@@ -172,12 +172,13 @@
     <Content Include="App\common\errorHandlerSrv.js" />
     <Content Include="App\common\kendoGridHideColumnDirective.js" />
     <Content Include="App\common\kendoGridHideDetailsDirective.js" />
+    <Content Include="App\common\moduleDependencyDirective.js" />
     <Content Include="App\common\modulesSvc.js" />
     <Content Include="App\common\permissionsSrv.js" />
-    <Content Include="App\index\management.html" />
-    <Content Include="App\index\managementCtrl.js" />
-    <Content Include="App\index\someLogo.html" />
-    <Content Include="App\index\someLogoCtrl.js" />
+    <Content Include="App\pages\index.html" />
+    <Content Include="App\pages\indexCtrl.js" />
+    <Content Include="App\pages\management.html" />
+    <Content Include="App\pages\managementCtrl.js" />
     <Content Include="App\modules\userModules\userModules.js" />
     <Content Include="App\modules\userModules\userModulesTable.html" />
     <Content Include="App\modules\userModules\userModulesTableCtrl.js" />
@@ -188,6 +189,7 @@
     <Content Include="App\modules\users\usersTableCtrl.js" />
     <Content Include="App\modules\users\usersTableDirective.js" />
     <Content Include="App\modules\welcome\dataSrv.js" />
+    <Content Include="App\modules\welcome\welcomeDirective.js" />
     <Content Include="App\navbar\navbar.html" />
     <Content Include="App\navbar\authForm.html" />
     <Content Include="App\navbar\authFormCtrl.js" />

@@ -37,12 +37,17 @@ namespace Paladyne.Angularjs.BL.Services
                 return;
             }
 
-            var userModule = new UserModule()
-                                 {
-                                     UserId = model.UserId,
-                                     ModuleId = model.ModuleId
-                                 };
-            UnitOfWork.UserModules.Attach(userModule);
+            var userModule = UnitOfWork.UserModules.FirstOrDefault(x => x.UserId == model.UserId && x.ModuleId == model.ModuleId);
+            if (userModule == null)
+            {
+                throw new Exception("User module not found");
+            }
+
+            if (userModule.Permission == Permissions.Prohibit)
+            {
+                throw new Exception("Access denied");
+            }
+
             model.MapTo(userModule);
             UnitOfWork.SaveChanges();
         }
