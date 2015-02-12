@@ -1,7 +1,8 @@
-angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'users', 'permissions', 'errorHandler', function($scope, modules, users, permissions, errorHandler) {
+angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'users', 'permissions', 'authInfo', 'errorHandler', function($scope, modules, users, permissions, authInfo, errorHandler) {
+    $scope.authInfo = authInfo;
     $scope.modules = modules;
     $scope.module = modules.users;
-    $scope.permissions = permissions.array;
+    $scope.permissions = permissions;
     if (!$scope.module.canSee && !$scope.module.canEdit) {
         return;
     }
@@ -25,7 +26,8 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
     };
 
     $scope.save = function(user) {
-        users.save(user);
-        $scope.grid.refresh();
+        users.save(user).success(function() {
+            $scope.grid.refresh();
+        });
     }
 }]);

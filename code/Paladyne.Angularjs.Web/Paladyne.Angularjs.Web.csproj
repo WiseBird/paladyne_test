@@ -170,11 +170,14 @@
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
     <Content Include="App\common\errorHandlerSrv.js" />
+    <Content Include="App\common\kendoGridHideColumnDirective.js" />
+    <Content Include="App\common\kendoGridHideDetailsDirective.js" />
     <Content Include="App\common\modulesSvc.js" />
     <Content Include="App\common\permissionsSrv.js" />
     <Content Include="App\index\management.html" />
     <Content Include="App\index\managementCtrl.js" />
     <Content Include="App\index\someLogo.html" />
+    <Content Include="App\index\someLogoCtrl.js" />
     <Content Include="App\modules\userModules\userModules.js" />
     <Content Include="App\modules\userModules\userModulesTable.html" />
     <Content Include="App\modules\userModules\userModulesTableCtrl.js" />

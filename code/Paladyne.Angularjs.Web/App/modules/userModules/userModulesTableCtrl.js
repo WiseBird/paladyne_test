@@ -1,4 +1,4 @@
-angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'errorHandler', function ($scope, modules, errorHandler) {
+angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'errorHandler', 'popup', function ($scope, modules, errorHandler, popup) {
     $scope.module = modules.userModules;
     if (!$scope.module.canSee && !$scope.module.canEdit) {
         return;
@@ -41,6 +41,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
             error: errorHandler
         },
         save: function (e) {
+            popup.success("User module successfully updated");
             var model = e.model;
             modules.setModuleName(model.id, model.name);
         }

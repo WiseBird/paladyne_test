@@ -24,9 +24,12 @@
                     </div>
                     <div class="k-edit-field" ng-repeat-end>
                         <select class="form-control" name="{{ module.id }}" ng-model="dataItem.modules[$index].permission">
-                            <option ng-repeat="(key, name) in permissions" value="{{ name }}" ng-selected="name == dataItem.modules[$parent.$index].permission">{{ name }}
+                            <option ng-repeat="(key, name) in permissions.array" value="{{ name }}" ng-selected="name == dataItem.modules[$parent.$index].permission">{{ name }}
                             </option>
                         </select>
+                        <span class="label label-warning" ng-show="dataItem.modules[$index].permission != permissions.edit && module.id == modules.users.id && dataItem.id == authInfo.userId">
+                            You will not be able to edit users table after saving
+                        </span>
                     </div>
                     
                     <div class="k-edit-field">

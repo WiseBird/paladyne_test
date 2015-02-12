@@ -23,14 +23,18 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
                 var authInfo = injector.get('authInfo');
                 var modules = injector.get('modules');
 
-                if (authInfo.isAuthenticated && modules.welcome.canSee) {
+                if (!authInfo.isAuthenticated) {
+                    return "/App/index/someLogo.html";
+                }
+
+                if (modules.welcome.canSee) {
                     return modules.welcome.view;
                 }
 
-                return "/App/index/someLogo.html";
+                return undefined;
             }, resolve: {
                 load: ['authInfo', 'modules', function (authInfo, modules) {
-                    if (!authInfo.isAuthenticated || !modules.welcome.canSee) {
+                    if (!modules.welcome.canSee) {
                         return undefined;
                     }
 
@@ -42,7 +46,7 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
             templateUrl: '/App/index/management.html',
             resolve: {
                 load: ['authInfo', 'modules', '$q', function (authInfo, modules, $q) {
-                    if (!authInfo.isAuthenticated) {
+                    if (!modules.hasAccessToManagement) {
                         return undefined;
                     }
 
@@ -67,7 +71,7 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
     }
 ]);
 
-angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'jQuery', function ($rootScope, $location, $route, authInfo, jQuery) {
+angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'modules', 'jQuery', function ($rootScope, $location, $route, authInfo, modules, jQuery) {
     jQuery.ajaxSetup({
         beforeSend: function (req) {
             if (authInfo.token) {
@@ -78,7 +82,12 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'jQ
 
     $rootScope.$on("$routeChangeStart", function (event, next) {
         var headintToTheRoot = next.$$route && (next.$$route.originalPath == "/");
+        var headintToTheManagement = next.$$route && (next.$$route.originalPath == "/management");
+
         if (!authInfo.isAuthenticated && !headintToTheRoot) {
+            event.preventDefault();
+            $location.path("/");
+        } else if (!modules.hasAccessToManagement && headintToTheManagement) {
             event.preventDefault();
             $location.path("/");
         }

@@ -1,4 +1,4 @@
-﻿angular.module('main').directive('kGridHideColumn', ['jQuery', function (jQuery) {
+angular.module('main').directive('kGridHideColumn', ['jQuery', function (jQuery) {
     function link(scope, element, attrs) {
         var grid = null;
         var hidden = false;

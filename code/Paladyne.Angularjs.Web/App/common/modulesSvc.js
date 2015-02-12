@@ -68,6 +68,8 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
             }
 
             updateModulesAcessProperties();
+
+            $rootScope.$broadcast("modules:changed");
         }
     };
     var modules = [service.welcome, service.users, service.userModules];
@@ -90,6 +92,8 @@ angular.module('main').factory('modules', ['$q', '$ocLazyLoad', '$rootScope', 'p
         }
 
         updateModulesAcessProperties();
+
+        $rootScope.$broadcast("modules:changed");
     });
 
     return service;
