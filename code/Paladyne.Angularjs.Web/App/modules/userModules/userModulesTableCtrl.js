@@ -1,8 +1,5 @@
 angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'modules', 'errorHandler', 'popup', function ($scope, modules, errorHandler, popup) {
     $scope.module = modules.userModules;
-    if (!$scope.module.canSee && !$scope.module.canEdit) {
-        return;
-    }
 
     function getIdentityUrl(data) {
         return $scope.module.url + "/" + data.id;

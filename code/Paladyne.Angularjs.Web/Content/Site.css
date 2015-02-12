@@ -50,10 +50,12 @@ input[type="checkbox"].input-validation-error {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
+/* kendo styles break nested bootstrap controls */
 .k-edit-field .form-control {
     box-sizing: border-box;
 }
 
+/* if ng-if is used for grid detail template then ghost element appears in the grid */
 .k-grid > .k-detail-template {
     display: none;
 }
@@ -63,4 +65,12 @@ input[type="checkbox"].input-validation-error {
 }
 .k-grid.kendo-grid-hide-details .k-hierarchy-cell {
     display: none;
+}
+
+/* comma separated list */
+span.commas-list-item:after {
+    content: ', '
+}
+span.commas-list-item:last-child:after {
+    content: ''
 }

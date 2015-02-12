@@ -3,9 +3,6 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
     $scope.modules = modules;
     $scope.module = modules.users;
     $scope.permissions = permissions;
-    if (!$scope.module.canSee && !$scope.module.canEdit) {
-        return;
-    }
 
     $scope.usersGridOptions = {
         columns: [
@@ -14,20 +11,55 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
             {
                 field: "modules",
                 title: "Modules",
-                template: "<span ng-repeat='module in dataItem.modules' ng-if='module.permission != permissions.prohibit'><span ng-if='$index != 0'>, </span>{{ modules[module.id].name }}</span>"
+                template: "<span class='commas-list-item' ng-repeat='module in dataItem.modules' ng-if='module.permission != permissions.prohibit'>{{ modules[module.id].name }}</span>"
             }
         ],
         dataSource: {
             transport: {
                 read: $scope.module.url
             },
+            schema: {
+                parse: function(userList) {
+                    for (var i = 0; i < userList.length; i++) {
+                        var user = userList[i];
+                        user.forEdit = angular.copy(user);
+                    }
+                    return userList;
+                }
+            },
             error: errorHandler
+        },
+        detailExpand: function (e) {
+            collapseExpanded();
+            $scope.expandedRow = e.masterRow;
         }
     };
 
-    $scope.save = function(user) {
-        users.save(user).success(function() {
+    $scope.save = function (user) {var u = user;
+        users.save(user.forEdit).success(function() {
+            copyUserData(user.forEdit, user);
+
             $scope.grid.refresh();
         });
+    }
+
+    $scope.cancelEdit = function(user) {
+        copyUserData(user, user.forEdit);
+        collapseExpanded();
+    }
+
+    function copyUserData(from, to) {
+        to.firstName = from.firstName;
+        to.lastName = from.lastName;
+        for (var i = 0; i < to.modules.length; i++) {
+            to.modules[i].name = from.modules[i].name;
+            to.modules[i].permission = from.modules[i].permission;
+        }
+    }
+
+    function collapseExpanded() {
+        if ($scope.expandedRow) {
+            $scope.grid.collapseRow($scope.expandedRow);
+        }
     }
 }]);
