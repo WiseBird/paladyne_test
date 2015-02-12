@@ -9,7 +9,7 @@ using Paladyne.Angularjs.DAL.Entities;
 
 namespace Paladyne.Angularjs.DAL
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IDbSet<User> Users { get; set; }
         IDbSet<UserModule> UserModules { get; set; }

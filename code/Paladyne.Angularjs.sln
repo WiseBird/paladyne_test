@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.DAL", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.BL", "Paladyne.Angularjs.BL\Paladyne.Angularjs.BL.csproj", "{22E04412-D724-4444-A3CD-F256CDEE153F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.DAL.Tests", "Paladyne.Angularjs.DAL.Tests\Paladyne.Angularjs.DAL.Tests.csproj", "{BE94D3FD-EEE8-46D8-A830-4B23B63A38F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paladyne.Angularjs.BL.Tests", "Paladyne.Angularjs.BL.Tests\Paladyne.Angularjs.BL.Tests.csproj", "{EA8FC565-7CE5-4558-8310-06DD4EC48775}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{22E04412-D724-4444-A3CD-F256CDEE153F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22E04412-D724-4444-A3CD-F256CDEE153F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22E04412-D724-4444-A3CD-F256CDEE153F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE94D3FD-EEE8-46D8-A830-4B23B63A38F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE94D3FD-EEE8-46D8-A830-4B23B63A38F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE94D3FD-EEE8-46D8-A830-4B23B63A38F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE94D3FD-EEE8-46D8-A830-4B23B63A38F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8FC565-7CE5-4558-8310-06DD4EC48775}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
