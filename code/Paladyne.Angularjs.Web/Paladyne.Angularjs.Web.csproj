@@ -169,6 +169,7 @@
     <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
+    <Content Include="App\common\configureLoadingOverlay.js" />
     <Content Include="App\common\errorHandlerSrv.js" />
     <Content Include="App\common\kendoGridHideColumnDirective.js" />
     <Content Include="App\common\kendoGridHideDetailsDirective.js" />
@@ -215,6 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\some-logo.jpg" />
     <Content Include="Content\toastr.css" />

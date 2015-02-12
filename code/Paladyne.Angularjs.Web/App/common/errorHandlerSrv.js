@@ -17,7 +17,7 @@ angular.module('main').factory('errorHandler', ['popup', function (popup) {
             return;
         }
 
-        if (arguments[0].xhr) {
+        if (arguments[0] && arguments[0].xhr) {
             if (arguments[0].errorThrown == "Unauthorized") {
                 popup.error("Access denied");
                 return;
