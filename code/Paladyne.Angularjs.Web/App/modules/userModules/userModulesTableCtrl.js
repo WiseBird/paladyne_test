@@ -30,7 +30,11 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
                     granter: { editable: false }
                 }
             }
-        }, 
+        },
+        sync: function (e) {
+            modules.setModuleName($scope.savingModel.id, $scope.savingModel.name);
+            popup.success("User module successfully updated");
+        },
         error: errorHandler
     });
 
@@ -43,9 +47,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
         editable: "inline",
         dataSource: dataSource,
         save: function (e) {
-            popup.success("User module successfully updated");
-            var model = e.model;
-            modules.setModuleName(model.id, model.name);
+            $scope.savingModel = e.model;
         }
     };
 
