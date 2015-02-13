@@ -166,16 +166,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\common\accountSvc.js" />
-    <Content Include="App\common\authInfo.js" />
-    <Content Include="App\common\authSvc.js" />
+    <Content Include="App\directives\kendoGridOneDetailsAtATimeDirective.js" />
+    <Content Include="App\services\accountSvc.js" />
+    <Content Include="App\services\authInfo.js" />
+    <Content Include="App\services\authSvc.js" />
     <Content Include="App\configureAuthTokenHeader.js" />
-    <Content Include="App\common\errorHandlerSrv.js" />
-    <Content Include="App\common\kendoGridHideColumnDirective.js" />
-    <Content Include="App\common\kendoGridHideDetailsDirective.js" />
-    <Content Include="App\common\moduleDependencyDirective.js" />
-    <Content Include="App\common\modulesSvc.js" />
-    <Content Include="App\common\permissionsSrv.js" />
+    <Content Include="App\services\errorHandlerSrv.js" />
+    <Content Include="App\directives\kendoGridHideColumnDirective.js" />
+    <Content Include="App\directives\kendoGridHideDetailsDirective.js" />
+    <Content Include="App\directives\moduleDependencyDirective.js" />
+    <Content Include="App\services\modulesSvc.js" />
+    <Content Include="App\services\permissionsSrv.js" />
     <Content Include="App\configureRoutingAuth.js" />
     <Content Include="App\pages\index.html" />
     <Content Include="App\pages\indexCtrl.js" />
@@ -201,7 +202,7 @@
     <Content Include="App\navbar\mainMenu.html" />
     <Content Include="App\navbar\mainMenuCtrl.js" />
     <Content Include="App\navbar\mainMenuDirective.js" />
-    <Content Include="App\common\popupSvc.js" />
+    <Content Include="App\services\popupSvc.js" />
     <Content Include="App\navbar\registerForm.html" />
     <Content Include="App\navbar\registerFormCtrl.js" />
     <Content Include="App\navbar\registerFormDirective.js" />
