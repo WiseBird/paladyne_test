@@ -1,4 +1,4 @@
-angular.module('main').factory('auth', ['$rootScope', '$http', '$location', 'authInfo', 'errorHandler', function ($rootScope, $http, $location, authInfo, errorHandler) {
+angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'errorHandler', function ($rootScope, $http, authInfo, errorHandler) {
     function authOk(data) {
         authInfo.isAuthenticated = true;
         authInfo.userId = data.userId;
@@ -20,11 +20,8 @@ angular.module('main').factory('auth', ['$rootScope', '$http', '$location', 'aut
             }).error(errorHandler);
         },
         tryAuth: function () {
-            var url = $location.url();
-
-            $http.post('/account/token').success(function (data) {
+            return $http.post('/account/token').success(function (data) {
                 authOk(data);
-                $location.path(url);
             });
         },
         logout: function () {

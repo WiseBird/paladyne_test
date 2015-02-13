@@ -41,9 +41,7 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
 
             var selectedRow = this.select();
             if (selectedRow && selectedRow[0] != e.masterRow[0]) {
-                this.collapseRow(e.masterRow);
                 this.select(e.masterRow);
-                return;
             }
 
             $scope.expandedRow = e.masterRow;
