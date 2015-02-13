@@ -54,7 +54,9 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
 
     $scope.$watch(function() {
         return modules.array.map(function(module) { return module.canSee; });
-    }, function() {
-        dataSource.read();
+    }, function () {
+        if ($scope.module.canSee) {
+            dataSource.read();
+        }
     }, true);
 }]);

@@ -141,7 +141,7 @@ namespace Paladyne.Angularjs.Web.Controllers
             var user = UserService.GetByNameEx(User.Identity.Name, new UserInclude().UserModules());
             if (user == null)
             {
-                return this.HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
             return AuthOkResult(user);
