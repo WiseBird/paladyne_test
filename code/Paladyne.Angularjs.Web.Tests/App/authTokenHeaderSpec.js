@@ -35,9 +35,10 @@ describe('authTokenHeaderSpec', function () {
             return headers['Authorization'] == 'Bearer AAA';
         }).respond(201, '');
 
-        $http.get("/");
 
+        $http.get("/");
         $httpBackend.flush();
+
 
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();

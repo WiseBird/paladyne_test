@@ -11,31 +11,37 @@
 
 /// <reference path="../../../paladyne.angularjs.web/app/app.js" />
 
+/// <reference path="../../../paladyne.angularjs.web/app/common/permissionssrv.js" />
+/// <reference path="../../../paladyne.angularjs.web/app/common/modulessvc.js" />
+
 /// <reference path="../../../paladyne.angularjs.web/app/pages/managementCtrl.js" />
 
 describe('managementCtrl', function () {
     var $controller,
-        $route;
+        $route,
+        $scope,
+        modules;
 
     beforeEach(function () {
         module('main');
 
-        inject(function (_$controller_, _$route_) {
+        inject(function (_$controller_, _$route_, _$rootScope_, _modules_) {
             $controller = _$controller_;
             $route = _$route_;
+            $scope = _$rootScope_.$new();
+            modules = _modules_;
         });
     });
 
     it('should reload route when access to page is lost', function () {
-        var $scope = {
-            $watch: function(f1, f2) {
-                f2(false);
-            }
-        };
-
         spyOn($route, 'reload');
 
-        $controller('managementCtrl', { $scope: $scope, $route: $route, modules: {} });
+        $controller('managementCtrl', { $scope: $scope, $route: $route });
+
+
+        modules.hasAccessToManagement = false;
+        $scope.$apply();
+
 
         expect($route.reload).toHaveBeenCalled();
     });
