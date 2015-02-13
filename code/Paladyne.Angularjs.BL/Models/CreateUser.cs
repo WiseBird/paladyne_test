@@ -14,9 +14,9 @@ namespace Paladyne.Angularjs.BL.Models
         public class UserModule
         {
             [Required]
-            public string ModuleId { get; set; }
+            public string Id { get; set; }
             [Required]
-            public string ModuleName { get; set; }
+            public string Name { get; set; }
             public Permissions Permission { get; set; }
             public string GranterId { get; set; }
         }

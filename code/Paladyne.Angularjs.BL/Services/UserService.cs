@@ -134,7 +134,7 @@ namespace Paladyne.Angularjs.BL.Services
             model.MapTo(user);
             foreach (var userModule in user.UserModules)
             {
-                var modelUserModule = model.Modules.FirstOrDefault(x => x.ModuleId == userModule.ModuleId);
+                var modelUserModule = model.Modules.FirstOrDefault(x => x.Id == userModule.ModuleId);
                 if (modelUserModule == null)
                 {
                     continue;

@@ -9,7 +9,7 @@ angular.module('main').config(['$routeProvider', '$locationProvider', function (
     });
 }]);
 
-angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'modules', 'jQuery', function ($rootScope, $location, $route, authInfo, modules, jQuery) {
+angular.module('main').run(['$rootScope', '$location', '$route', 'authInfo', 'modules', function ($rootScope, $location, $route, authInfo, modules) {
     $rootScope.$on("$routeChangeStart", function (event, next) {
         var headintToTheRoot = next.$$route && (next.$$route.originalPath == "/");
         var headintToTheManagement = next.$$route && (next.$$route.originalPath == "/management");

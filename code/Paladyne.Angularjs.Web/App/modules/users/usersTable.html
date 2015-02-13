@@ -27,7 +27,7 @@
                             <option ng-repeat="(key, name) in permissions.array" value="{{ name }}" ng-selected="name == dataItem.forEdit.modules[$parent.$index].permission">{{ name }}
                             </option>
                         </select>
-                        <span class="label label-warning" ng-show="dataItem.forEdit.modules[$index].permission != permissions.edit && module.id == modules.users.id && dataItem.forEdit.id == authInfo.userId">
+                        <span class="label label-warning" ng-show="dataItem.forEdit.modules[$index].permission != permissions.edit && module.id == modules.users.id && dataItem.forEdit.userId == authInfo.userId">
                             You will not be able to edit users table after saving
                         </span>
                     </div>

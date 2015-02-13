@@ -23,7 +23,7 @@ namespace Paladyne.Angularjs.DAL.Entities
         public string LastName { get; set; }
         public DateTime? LastLogin { get; set; }
 
-        public virtual List<UserModule> UserModules { get; set; }
-        public virtual List<UserModule> Granted { get; set; }
+        public virtual ICollection<UserModule> UserModules { get; set; }
+        public virtual ICollection<UserModule> Granted { get; set; }
     }
 }

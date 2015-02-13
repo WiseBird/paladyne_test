@@ -1,5 +1,14 @@
-angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInfo', 'errorHandler', function ($rootScope, $http, popup, authInfo, errorHandler) {
-    return {
+angular.module('main').factory('auth', ['$rootScope', '$http', '$location', 'authInfo', 'errorHandler', function ($rootScope, $http, $location, authInfo, errorHandler) {
+    function authOk(data) {
+        authInfo.isAuthenticated = true;
+        authInfo.userId = data.userId;
+        authInfo.userName = data.userName;
+        authInfo.token = data.token;
+
+        $rootScope.$broadcast("auth:logged_in", data);
+    }
+
+    var service = {
         login: function (username, password) {
             var loginData = {
                 username: username,
@@ -7,15 +16,20 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInf
             };
 
             $http.post('/account/login', loginData).success(function (data) {
-                authInfo.isAuthenticated = true;
-                authInfo.userId = data.userId;
-                authInfo.userName = username;
-                authInfo.token = data.token;
-
-                $rootScope.$broadcast("auth:logged_in", data);
+                authOk(data);
             }).error(errorHandler);
         },
-        logout: function() {
+        tryAuth: function () {
+            var url = $location.url();
+
+            $http.post('/account/token').success(function (data) {
+                authOk(data);
+                $location.path(url);
+            });
+        },
+        logout: function () {
+            $http.post('/account/logout');
+
             authInfo.isAuthenticated = false;
             authInfo.userId = null;
             authInfo.userName = null;
@@ -24,4 +38,6 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'popup', 'authInf
             $rootScope.$broadcast("auth:logged_out", authInfo);
         }
     };
+
+    return service;
 }]);

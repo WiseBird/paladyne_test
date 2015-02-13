@@ -33,6 +33,10 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
             error: errorHandler
         },
         detailExpand: function (e) {
+            if ($scope.expandedRow && $scope.expandedRow[0] == e.masterRow[0]) {
+                return;
+            }
+
             collapseExpanded();
             $scope.expandedRow = e.masterRow;
         }

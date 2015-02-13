@@ -50,8 +50,8 @@ namespace Paladyne.Angularjs.Web.Infrastructure
             {
                 admin.Modules.Add(new CreateUser.UserModule()
                                       {
-                                          ModuleId = moduleName,
-                                          ModuleName = moduleName,
+                                          Id = moduleName,
+                                          Name = moduleName,
                                           Permission = Permissions.Edit
                                       });
             }

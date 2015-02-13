@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\authOnStart.js" />
     <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
@@ -1047,7 +1048,6 @@
     <Compile Include="Models\Account\RegisterUser.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\UserModules\UpdateUserModule.cs" />
-    <Compile Include="Models\Users\UpdateUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

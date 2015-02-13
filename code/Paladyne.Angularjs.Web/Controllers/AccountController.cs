@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.ServiceModel.Security;
 using System.Web;
 
 using Microsoft.AspNet.Identity;
@@ -48,19 +49,8 @@ namespace Paladyne.Angularjs.Web.Controllers
             }
 
             SetAuthCookie(user);
-            var token = GetAuthToken(user);
 
-            return Json(new
-            {
-                token,
-                userId = user.Id,
-                modules = user.UserModules.Select(x => new
-                {
-                    id = x.ModuleId,
-                    name = x.ModuleName,
-                    permission = x.Permission.ToString()
-                })
-            });
+            return AuthOkResult(user);
         }
         private static string GetAuthToken(User user)
         {
@@ -85,6 +75,21 @@ namespace Paladyne.Angularjs.Web.Controllers
             this.AuthenticationManager.SignOut();
             this.AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true, }, identity);
         }
+        private ActionResult AuthOkResult(User user)
+        {
+            var token = GetAuthToken(user);
+
+            return
+                this.Json(new
+                {
+                    token,
+                    userId = user.Id,
+                    userName = user.UserName,
+                    modules =
+                        user.UserModules.Select(
+                            x => new { id = x.ModuleId, name = x.ModuleName, permission = x.Permission.ToString() })
+                });
+        }
 
         [HttpPost]
         public ActionResult Register(RegisterUser model)
@@ -99,20 +104,20 @@ namespace Paladyne.Angularjs.Web.Controllers
 
             user.Modules.Add(new CreateUser.UserModule()
             {
-                ModuleId = Modules.welcome.ToString(),
-                ModuleName = Modules.welcome.ToString(),
+                Id = Modules.welcome.ToString(),
+                Name = Modules.welcome.ToString(),
                 Permission = Permissions.See
             });
             user.Modules.Add(new CreateUser.UserModule()
             {
-                ModuleId = Modules.users.ToString(),
-                ModuleName = Modules.users.ToString(),
+                Id = Modules.users.ToString(),
+                Name = Modules.users.ToString(),
                 Permission = Permissions.Prohibit
             });
             user.Modules.Add(new CreateUser.UserModule()
             {
-                ModuleId = Modules.userModules.ToString(),
-                ModuleName = Modules.userModules.ToString(),
+                Id = Modules.userModules.ToString(),
+                Name = Modules.userModules.ToString(),
                 Permission = Permissions.Edit
             });
 
@@ -127,6 +132,27 @@ namespace Paladyne.Angularjs.Web.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
             }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Token()
+        {
+            var user = UserService.GetByNameEx(User.Identity.Name, new UserInclude().UserModules());
+            if (user == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            return AuthOkResult(user);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            this.AuthenticationManager.SignOut();
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

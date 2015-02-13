@@ -28,12 +28,15 @@ namespace Paladyne.Angularjs.BL
             Mapper.CreateMap<CreateUser, User>()
                 .ForMember(x => x.UserModules, x => x.MapFrom(y => y.Modules));
 
-            Mapper.CreateMap<CreateUser.UserModule, UserModule>();
+            Mapper.CreateMap<CreateUser.UserModule, UserModule>()
+                .ForMember(x => x.ModuleId, x => x.MapFrom(y => y.Id))
+                .ForMember(x => x.ModuleName, x => x.MapFrom(y => y.Name));
 
             Mapper.CreateMap<UpdateUserModule, UserModule>();
 
             Mapper.CreateMap<UpdateUserData, User>();
-            Mapper.CreateMap<UpdateUserData.UserModule, UserModule>();
+            Mapper.CreateMap<UpdateUserData.UserModule, UserModule>()
+                .ForMember(x => x.ModuleId, x => x.MapFrom(y => y.Id));
         }
     }
 }

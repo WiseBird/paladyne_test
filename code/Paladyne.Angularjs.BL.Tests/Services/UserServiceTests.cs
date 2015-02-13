@@ -124,7 +124,7 @@ namespace Paladyne.Angularjs.BL.Tests.Services
         {
             return new UpdateUserData.UserModule()
                                       {
-                                          ModuleId = "nonexistent",
+                                          Id = "nonexistent",
                                           Permission = Permissions.Prohibit
                                       };
         }

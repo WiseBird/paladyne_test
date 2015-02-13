@@ -34,6 +34,7 @@ angular.module('userModules').controller('userModulesTableCtrl', ['$scope', 'mod
         sync: function (e) {
             modules.setModuleName($scope.savingModel.id, $scope.savingModel.name);
             popup.success("User module successfully updated");
+            $scope.$apply();
         },
         error: errorHandler
     });

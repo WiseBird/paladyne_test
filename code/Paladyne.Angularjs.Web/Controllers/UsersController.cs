@@ -9,11 +9,11 @@ using System.Web.Http;
 using Ninject;
 
 using Paladyne.Angularjs.BL.Includes;
+using Paladyne.Angularjs.BL.Models;
 using Paladyne.Angularjs.BL.Services;
 using Paladyne.Angularjs.DAL.Entities;
 using Paladyne.Angularjs.Web.Infrastructure;
 using Paladyne.Angularjs.Web.Models;
-using Paladyne.Angularjs.Web.Models.Users;
 
 namespace Paladyne.Angularjs.Web.Controllers
 {
@@ -28,11 +28,16 @@ namespace Paladyne.Angularjs.Web.Controllers
             var users = UserService.GetAll(new UserInclude().UserModules());
             return Ok(users.Select(x => new
                                             {
-                                                id = x.Id,
+                                                userId = x.Id,
                                                 firstName = x.FirstName,
                                                 lastName = x.LastName,
                                                 modules = x.UserModules
-                                                    .Select(y => new { id = y.ModuleId, name = y.ModuleName, permission = y.Permission.ToString()})
+                                                    .Select(y => new
+                                                                     {
+                                                                         id = y.ModuleId, 
+                                                                         name = y.ModuleName, 
+                                                                         permission = y.Permission.ToString()
+                                                                     })
                                             }));
         }
 
@@ -45,21 +50,14 @@ namespace Paladyne.Angularjs.Web.Controllers
                 return this.StatusCode(HttpStatusCode.Unauthorized);
             }
 
-            var blModel = new BL.Models.UpdateUserData()
+            model.UserId = id;
+            foreach (var module in model.Modules)
             {
-                UserId = model.Id,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Modules = model.Modules.Select(x => new BL.Models.UpdateUserData.UserModule()
-                                                        {
-                                                            ModuleId = x.Id,
-                                                            Permission = x.Permission,
-                                                            GranterId = user.Id
-                                                        }).ToList()
-            };
+                module.GranterId = user.Id;
+            }
 
             var errors = new List<string>();
-            UserService.Update(blModel, new ValidationErrors(errors));
+            UserService.Update(model, new ValidationErrors(errors));
             if (errors.Count != 0)
             {
                 return new ServiceErrorsResult(errors);
