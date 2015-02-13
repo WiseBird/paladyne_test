@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\authTokenHeaderSpec.js" />
-    <Content Include="App\pages\managementCtrlSpec.js" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Scripts\jasmine\boot.js" />

@@ -166,7 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\authOnStart.js" />
     <Content Include="App\common\accountSvc.js" />
     <Content Include="App\common\authInfo.js" />
     <Content Include="App\common\authSvc.js" />
@@ -177,7 +176,7 @@
     <Content Include="App\common\moduleDependencyDirective.js" />
     <Content Include="App\common\modulesSvc.js" />
     <Content Include="App\common\permissionsSrv.js" />
-    <Content Include="App\configureRouting.js" />
+    <Content Include="App\configureRoutingAuth.js" />
     <Content Include="App\pages\index.html" />
     <Content Include="App\pages\indexCtrl.js" />
     <Content Include="App\pages\management.html" />
