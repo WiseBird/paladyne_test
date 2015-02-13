@@ -32,37 +32,8 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
             },
             error: errorHandler
         },
-        detailExpand: function (e) {
-            if (isDetailsExpanded(e.masterRow)) {
-                return;
-            }
-
-            collapseDetails();
-
-            var selectedRow = this.select();
-            if (selectedRow && selectedRow[0] != e.masterRow[0]) {
-                this.select(e.masterRow);
-            }
-
-            $scope.expandedRow = e.masterRow;
-        },
-        detailCollapse: function (e) {
-            var dataItem = this.dataItem(e.masterRow[0]);
-            if (dataItem) {
-                resetEdit(dataItem);
-            }
-
-            $scope.expandedRow = null;
-        },
-        selectable: "row",
-        change: function () {
-            var row = this.select();
-            if (isDetailsExpanded(row)) {
-                $scope.grid.collapseRow(row);
-            } else {
-                $scope.grid.expandRow(row);
-            }
-        }
+        detailCollapse: onDetailCollapse,
+        selectable: "row"
     };
 
     $scope.save = function (user) {var u = user;
@@ -75,12 +46,14 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
 
     $scope.cancelEdit = function(user) {
         resetEdit(user);
-        collapseDetails();
+
+        $scope.grid.unbind("detailCollapse", onDetailCollapse);
+        $scope.grid.collapseDetails();
+        $scope.grid.bind("detailCollapse", onDetailCollapse);
     }
 
     function resetEdit(user) {
         copyUserData(user, user.forEdit);
-        $scope.$apply();
     }
     function copyUserData(from, to) {
         to.firstName = from.firstName;
@@ -91,15 +64,11 @@ angular.module('users').controller('usersTableCtrl', ['$scope', 'modules', 'user
         }
     }
 
-    function isDetailsExpanded(row) {
-        if ($scope.expandedRow && $scope.expandedRow[0] == row[0]) {
-            return true;
-        }
-        return false;
-    }
-    function collapseDetails() {
-        if ($scope.expandedRow) {
-            $scope.grid.collapseRow($scope.expandedRow);
+    function onDetailCollapse(e) {
+        var dataItem = this.dataItem(e.masterRow[0]);
+        if (dataItem) {
+            resetEdit(dataItem);
+            $scope.$apply();
         }
     }
 }]);

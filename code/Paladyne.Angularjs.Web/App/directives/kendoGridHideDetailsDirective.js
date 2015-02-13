@@ -1,16 +1,19 @@
 angular.module('main').directive('kGridHideDetails', ['jQuery', function (jQuery) {
     function link(scope, element, attrs) {
-        var grid = null;
         var hidden = false;
 
-        var unwatch = scope.$watch(function () {
+        var unwatchGrid = scope.$watch(function () {
             return jQuery(element).data("kendoGrid");
-        }, function (val) {
-            if (!val) {
+        }, function (gridInited) {
+            if (!gridInited) {
                 return;
             }
 
-            unwatch();
+            unwatchGrid();
+            watchForSettings();
+        });
+
+        function watchForSettings() {
             scope.$watch(attrs['kGridHideDetails'], function (hide) {
                 if (hidden != hide) {
                     hidden = !hidden;
@@ -21,7 +24,7 @@ angular.module('main').directive('kGridHideDetails', ['jQuery', function (jQuery
                     }
                 }
             }, true);
-        });
+        }
     }
     return {
         restrict: 'A',

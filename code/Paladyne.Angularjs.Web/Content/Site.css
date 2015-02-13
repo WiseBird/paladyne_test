@@ -66,6 +66,9 @@ input[type="checkbox"].input-validation-error {
 .k-grid.kendo-grid-hide-details .k-hierarchy-cell {
     display: none;
 }
+.k-grid.kendo-grid-hide-details .k-detail-row {
+    display: none !important;
+}
 
 /* comma separated list */
 span.commas-list-item:after {
