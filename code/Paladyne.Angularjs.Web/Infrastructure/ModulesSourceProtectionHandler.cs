@@ -102,6 +102,16 @@ namespace Paladyne.Angularjs.Web.Infrastructure
                 return;
             }
 
+            var lastModified = fileinfo.LastWriteTimeUtc.ToString("R");
+            if (lastModified == context.Request.Headers["If-Modified-Since"])
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.NotModified;
+                context.Response.End();
+                return;
+            }
+
+            context.Response.AddHeader("Last-Modified", lastModified);
+            context.Response.AddHeader("Cache-Control", "max-age=0");
             context.Response.ContentType = GetContentType(fileinfo);
             context.Response.TransmitFile(filename);
             context.Response.End();
