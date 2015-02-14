@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\authTokenHeaderSpec.js" />
+    <Content Include="App\directives\moduleDependencyDirectiveSpec.js" />
+    <Content Include="App\routingAuthSpec.js" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Scripts\jasmine\boot.js" />

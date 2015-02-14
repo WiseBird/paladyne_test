@@ -12,24 +12,14 @@
 /// <reference path="../../paladyne.angularjs.web/app/app.js" />
 /// <reference path="../../paladyne.angularjs.web/app/configureauthtokenheader.js" />
 
-/// <reference path="../../paladyne.angularjs.web/app/common/authinfo.js" />
+/// <reference path="../../paladyne.angularjs.web/app/services/authinfo.js" />
 
 describe('authTokenHeaderSpec', function () {
-    var $httpBackend,
-        $http,
-        authInfo;
-
     beforeEach(function () {
         module('main');
-
-        inject(function (_$httpBackend_, _$http_, _authInfo_) {
-            $httpBackend = _$httpBackend_;
-            $http = _$http_;
-            authInfo = _authInfo_;
-        });
     });
 
-    it('should include auth token', function () {
+    it('should include auth token', inject(function ($httpBackend, $http, authInfo) {
         authInfo.token = "AAA";
         $httpBackend.expectGET("/", function (headers) {
             return headers['Authorization'] == 'Bearer AAA';
@@ -42,5 +32,5 @@ describe('authTokenHeaderSpec', function () {
 
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
-    });
+    }));
 });

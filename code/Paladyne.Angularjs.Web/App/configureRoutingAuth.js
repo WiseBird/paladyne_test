@@ -3,7 +3,7 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'auth', 'module
         $location.path("/");
     }
 
-    var triedToAuth = false;
+    var triedAuth = false;
     // Checks user rights for route
     $rootScope.$on("$routeChangeStart", function (event, next) {
         if (!next.$$route.canAccess) {
@@ -13,7 +13,7 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'auth', 'module
         if (!$injector.invoke(next.$$route.canAccess)) {
             event.preventDefault();
             // We will suspend user on unaccessible page until auth is retrieved.
-            if (triedToAuth) {
+            if (triedAuth) {
                 onUnauthRoute();
             }
         }
@@ -33,7 +33,7 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'auth', 'module
     }, true);
 
     auth.tryAuth().finally(function () {
-        triedToAuth = true;
+        triedAuth = true;
 
         // Rerender current page with correct rights
         $route.reload();
