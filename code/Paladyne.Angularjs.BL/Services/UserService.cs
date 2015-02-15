@@ -116,6 +116,8 @@ namespace Paladyne.Angularjs.BL.Services
                 errors.AddErrorsFromResult(result);
                 return;
             }
+
+            model.UserId = user.Id;
         }
 
         public void Update(UpdateUserData model, IValidationErrors errors)

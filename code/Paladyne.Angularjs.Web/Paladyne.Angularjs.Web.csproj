@@ -167,7 +167,6 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\directives\kendoGridOneDetailsAtATimeDirective.js" />
-    <Content Include="App\services\accountSvc.js" />
     <Content Include="App\services\authInfo.js" />
     <Content Include="App\services\authSvc.js" />
     <Content Include="App\configureAuthTokenHeader.js" />

@@ -33,6 +33,18 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'erro
             authInfo.token = null;
 
             $rootScope.$broadcast("auth:logged_out", authInfo);
+        },
+        register: function (userName, password, firstName, lastName) {
+            var registerData = {
+                userName: userName,
+                password: password,
+                firstName: firstName,
+                lastName: lastName
+            };
+
+            $http.post('/account/register', registerData).success(function () {
+                service.login(userName, password);
+            }).error(errorHandler);
         }
     };
 
