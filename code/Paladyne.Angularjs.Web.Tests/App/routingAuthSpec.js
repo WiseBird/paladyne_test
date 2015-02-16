@@ -12,7 +12,7 @@
 /// <reference path="../../paladyne.angularjs.web/app/app.js" />
 /// <reference path="../../paladyne.angularjs.web/app/configureroutingauth.js" />
 
-/// <reference path="../../paladyne.angularjs.web/app/services/permissionssrv.js" />
+/// <reference path="../../paladyne.angularjs.web/app/services/permissionssvc.js" />
 /// <reference path="../../paladyne.angularjs.web/app/services/modulessvc.js" />
 /// <reference path="../../paladyne.angularjs.web/app/services/authinfo.js" />
 
