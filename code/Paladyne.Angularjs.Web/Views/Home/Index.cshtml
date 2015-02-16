@@ -25,6 +25,10 @@
         <div ng-view></div>
     </div>
 
+    <div id="loading-overlay" style="display: none;">
+        <img src="/content/loading.gif" class="loading-img" />
+    </div>
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
@@ -44,12 +48,13 @@
     <script src="~/App/directives/kendoGridOneDetailsAtATimeDirective.js"></script>
     <script src="~/App/directives/moduleDependencyDirective.js"></script>
 
+    <script src="~/App/services/overlaySvc.js"></script>
     <script src="~/App/services/popupSvc.js"></script>
-    <script src="~/App/services/errorHandlerSrv.js"></script>
+    <script src="~/App/services/errorHandlerSvc.js"></script>
     <script src="~/App/services/authSvc.js"></script>
     <script src="~/App/services/authInfo.js"></script>
     <script src="~/App/services/modulesSvc.js"></script>
-    <script src="~/App/services/permissionsSrv.js"></script>
+    <script src="~/App/services/permissionsSvc.js"></script>
 
     <script src="~/App/pages/indexCtrl.js"></script>
     <script src="~/App/pages/managementCtrl.js"></script>

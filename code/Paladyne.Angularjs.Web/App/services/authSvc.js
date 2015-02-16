@@ -1,4 +1,4 @@
-angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'errorHandler', function ($rootScope, $http, authInfo, errorHandler) {
+angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'errorHandler', 'overlay', function ($rootScope, $http, authInfo, errorHandler, overlay) {
     function authOk(data) {
         authInfo.isAuthenticated = true;
         authInfo.userId = data.userId;
@@ -15,14 +15,14 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'erro
                 password: password
             };
 
-            $http.post('/account/login', loginData).success(function (data) {
+            return overlay.wrap($http.post('/account/login', loginData).success(function (data) {
                 authOk(data);
-            }).error(errorHandler);
+            }).error(errorHandler));
         },
         tryAuth: function () {
-            return $http.post('/account/token').success(function (data) {
+            return overlay.wrap($http.post('/account/token').success(function (data) {
                 authOk(data);
-            });
+            }));
         },
         logout: function () {
             $http.post('/account/logout');
@@ -42,9 +42,9 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'erro
                 lastName: lastName
             };
 
-            $http.post('/account/register', registerData).success(function () {
+            return overlay.wrap($http.post('/account/register', registerData).success(function () {
                 service.login(userName, password);
-            }).error(errorHandler);
+            }).error(errorHandler));
         }
     };
 

@@ -34,8 +34,9 @@ angular.module('main').run(['$rootScope', '$location', '$route', 'auth', 'module
 
     auth.tryAuth().finally(function () {
         triedAuth = true;
+    });
 
-        // Rerender current page with correct rights
+    $rootScope.$on("auth:logged_in", function () {
         $route.reload();
     });
 }]);

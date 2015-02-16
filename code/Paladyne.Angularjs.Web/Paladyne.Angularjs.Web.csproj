@@ -170,12 +170,13 @@
     <Content Include="App\services\authInfo.js" />
     <Content Include="App\services\authSvc.js" />
     <Content Include="App\configureAuthTokenHeader.js" />
-    <Content Include="App\services\errorHandlerSrv.js" />
+    <Content Include="App\services\errorHandlerSvc.js" />
     <Content Include="App\directives\kendoGridHideColumnDirective.js" />
     <Content Include="App\directives\kendoGridHideDetailsDirective.js" />
     <Content Include="App\directives\moduleDependencyDirective.js" />
     <Content Include="App\services\modulesSvc.js" />
-    <Content Include="App\services\permissionsSrv.js" />
+    <Content Include="App\services\overlaySvc.js" />
+    <Content Include="App\services\permissionsSvc.js" />
     <Content Include="App\configureRoutingAuth.js" />
     <Content Include="App\pages\index.html" />
     <Content Include="App\pages\indexCtrl.js" />
@@ -217,6 +218,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\some-logo.png" />
     <Content Include="Content\toastr.css" />

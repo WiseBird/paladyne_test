@@ -1,7 +1,7 @@
-angular.module('welcome').factory('welcomeData', ['$http', 'errorHandler', function ($http, errorHandler) {
+angular.module('welcome').factory('welcomeData', ['$http', 'errorHandler', 'overlay', function ($http, errorHandler, overlay) {
     return {
         load: function () {
-            return $http.get('/api/welcome').error(errorHandler);
+            return overlay.wrap($http.get('/api/welcome').error(errorHandler));
         }
     };
 }]);
