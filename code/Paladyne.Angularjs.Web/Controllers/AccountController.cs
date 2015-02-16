@@ -128,10 +128,8 @@ namespace Paladyne.Angularjs.Web.Controllers
             {
                 return new ServiceErrorsResult(errors);
             }
-            else
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
-            }
+
+            return Login(model.UserName, model.Password);
         }
 
         [HttpPost]

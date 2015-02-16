@@ -42,8 +42,8 @@ angular.module('main').factory('auth', ['$rootScope', '$http', 'authInfo', 'erro
                 lastName: lastName
             };
 
-            return overlay.wrap($http.post('/account/register', registerData).success(function () {
-                service.login(userName, password);
+            return overlay.wrap($http.post('/account/register', registerData).success(function (data) {
+                authOk(data);
             }).error(errorHandler));
         }
     };
