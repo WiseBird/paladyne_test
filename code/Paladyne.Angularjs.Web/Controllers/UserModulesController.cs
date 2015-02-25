@@ -15,6 +15,8 @@ using Paladyne.Angularjs.Web.Infrastructure;
 using Paladyne.Angularjs.Web.Models;
 using Paladyne.Angularjs.Web.Models.UserModules;
 
+using Microsoft.AspNet.Identity;
+
 namespace Paladyne.Angularjs.Web.Controllers
 {
     public class UserModulesController : ApiController
@@ -39,15 +41,9 @@ namespace Paladyne.Angularjs.Web.Controllers
         [ModuleAuthorize(Modules.userModules, Permissions.Edit)]
         public IHttpActionResult Put(string id, [FromBody]UpdateUserModule model)
         {
-            var user = UserService.GetByName(User.Identity.Name);
-            if (user == null)
-            {
-                return this.StatusCode(HttpStatusCode.Unauthorized);
-            }
-
             var blModel = new BL.Models.UpdateUserModule()
                               {
-                                  UserId = user.Id,
+                                  UserId = User.Identity.GetUserId(),
                                   ModuleId = id,
                                   ModuleName = model.Name
                               };
