@@ -95,6 +95,32 @@ namespace Paladyne.Angularjs.BL.Tests.Services
             }
         }
 
+        [Test]
+        public void Update_WhenModulesPermissionDidntChange_DoesNotUpdateIt()
+        {
+            using (var context = ContextHelper.Create())
+            {
+                var user = context.AddUser();
+                var module = context.AddUserModule();
+
+                var granter = context.AddUser();
+
+                var model = GetValidUpdateUserData(user);
+                var moduleModel = GetValidUserModule(module);
+                moduleModel.GranterId = granter.Id;
+                model.Modules.Add(moduleModel);
+
+                var service = Factory.CreateUserService(context);
+
+
+                Helper.Suppress(() => service.Update(model, null));
+                var userModuleFrromDb = context.UserModules.First();
+
+
+                Assert.AreNotEqual(userModuleFrromDb.GranterId, granter.Id);
+            }
+        }
+
         private static CreateUser GetValidCreateUser()
         {
             return new CreateUser()
@@ -119,14 +145,32 @@ namespace Paladyne.Angularjs.BL.Tests.Services
                 LastName = "LastName"
             };
         }
+        private static UpdateUserData GetValidUpdateUserData(User user)
+        {
+            return new UpdateUserData()
+            {
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+        }
 
         public static UpdateUserData.UserModule GetValidUserModule()
         {
             return new UpdateUserData.UserModule()
-                                      {
-                                          Id = "nonexistent",
-                                          Permission = Permissions.Prohibit
-                                      };
+            {
+                Id = "nonexistent",
+                Permission = Permissions.Prohibit
+            };
+        }
+        public static UpdateUserData.UserModule GetValidUserModule(UserModule userModule)
+        {
+            return new UpdateUserData.UserModule()
+            {
+                Id = userModule.ModuleId,
+                Permission = userModule.Permission,
+                GranterId = userModule.GranterId
+            };
         }
     }
 }

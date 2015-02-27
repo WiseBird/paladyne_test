@@ -51,6 +51,8 @@ namespace Paladyne.Angularjs.DAL.Tests
             }
 
             context.UserModules.Add(entity);
+            entity.User.UserModules.Add(entity);
+
             context.SaveChanges();
             return entity;
         }

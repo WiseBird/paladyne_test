@@ -141,6 +141,10 @@ namespace Paladyne.Angularjs.BL.Services
                 {
                     continue;
                 }
+                if (modelUserModule.Permission == userModule.Permission)
+                {
+                    continue;
+                }
 
                 modelUserModule.MapTo(userModule);
             }
