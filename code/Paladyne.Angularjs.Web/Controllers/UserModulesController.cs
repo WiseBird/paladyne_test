@@ -29,7 +29,7 @@ namespace Paladyne.Angularjs.Web.Controllers
         [ModuleAuthorize(Modules.userModules)]
         public IHttpActionResult Get()
         {
-            var user = UserService.GetByNameEx(User.Identity.Name, new UserInclude().UserModules(true));
+            var user = UserService.GetByNameEx(User.Identity.Name, new UserInclude().UserModules(x => x.Granter()));
             return Ok(user.UserModules.Where(x => x.Permission != Permissions.Prohibit).Select(x => new
             {
                 id = x.ModuleId,

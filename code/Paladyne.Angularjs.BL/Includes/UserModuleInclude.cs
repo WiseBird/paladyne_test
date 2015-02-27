@@ -25,18 +25,18 @@ namespace Paladyne.Angularjs.BL.Includes
             return this;
         }
 
-        public override IQueryable<UserModule> Execute(IQueryable<UserModule> query)
+        public override void Execute<TParentEntity>(Includer<TParentEntity, UserModule> includer)
         {
             if (user)
             {
-                query = query.Include(x => x.User);
+                includer.Include(x => x.User);
             }
             if (granter)
             {
-                query = query.Include(x => x.Granter);
+                includer.Include(x => x.Granter);
             }
 
-            return base.Execute(query);
+            base.Execute(includer);
         }
     }
 }

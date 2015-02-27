@@ -11,28 +11,25 @@ namespace Paladyne.Angularjs.BL.Includes
 {
     public class UserInclude : Include<User>
     {
-        private bool userModules;
-        private bool granter;
-
-        public UserInclude UserModules(bool granter = false)
+        private UserModuleInclude userModules;
+        public UserInclude UserModules(Action<UserModuleInclude> setup = null)
         {
-            userModules = true;
-            this.granter = granter;
+            userModules = new UserModuleInclude();
+            if (setup != null)
+            {
+                setup(userModules);
+            }
             return this;
         }
 
-        public override IQueryable<User> Execute(IQueryable<User> query)
+        public override void Execute<TParentEntity>(Includer<TParentEntity, User> includer)
         {
-            if (userModules)
+            if (userModules != null)
             {
-                query = query.Include(x => x.UserModules);
-            }
-            if (granter)
-            {
-                query = query.Include(x => x.UserModules.Select(y => y.Granter));
+                includer.Include(x => x.UserModules, userModules);
             }
 
-            return base.Execute(query);
+            base.Execute(includer);
         }
     }
 }
